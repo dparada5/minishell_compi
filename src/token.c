@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:49:38 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/07 16:41:09 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/11 11:50:24 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ t_token	*get_tokens(char *line)
 			i += tokens(&line[i], &token, 0);
 		else
 			i += words(&line[i], &token);
+		printf("%c\n", line[i]);
 	}
 	printf_tokens(token);
 	token_next(token);

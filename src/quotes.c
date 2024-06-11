@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 10:18:01 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/11 11:03:11 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/11 11:53:58 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ char	*count_quotes(char *line, char c, int *flag, int *i)
 {
 	int	l;
 
-	(*flag) = 0;
+	// (*flag) = 0;
 	while (line[*i] == c)
 		(*i)++;
 	// if ((*i) == (int)ft_strlen(line))
 	// 	return (ft_substr(line, 1, (*i)++ - 2));
-	if ((*i) > 1 &&  line[(*i) + 1] == ' ')
-	{
-		(*i)++;
-		return (NULL);
-	}
+	// if ((*i) > 1 &&  line[(*i) + 1] == ' ')
+	// {
+	// 	(*i)++;
+	// 	return (NULL);
+	// }
 	l = (*i);
 	(*flag) = 1;
 	while (line[l])
@@ -83,8 +83,7 @@ int	quotes(t_token **tokens, char *line, char c, int i)
 		i += next_ocurrence(&line[i], c, 1);
 		free(aux1);
 	}
-	if (buffer)
-		create_token_list(tokens, T_W, buffer);
+	create_token_list(tokens, T_W, buffer);
 	i += next_ocurrence(&line[i], c, 0);
 	return (i);
 }
