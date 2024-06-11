@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:58:49 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/11 17:40:26 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/11 18:55:37 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ char	*copy_quote(char *line, char d, char s, int j)
 		else if (line[i] == d || line[i] == s)
 		{
 			c = line[i];
+			
 			while (line[i] == c)
 				i++;
 		}
