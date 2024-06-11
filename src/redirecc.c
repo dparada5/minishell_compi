@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:50:53 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/07 14:59:38 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/11 16:44:24 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_token	*redirecc(t_minishell *minishell, t_token *token)
 
 	fd_in = 0;
 	fd_out = 1;
+	(void)minishell;
 	if (token->token == T_G)
 	{
 		token = token->next;
@@ -39,8 +40,8 @@ t_token	*redirecc(t_minishell *minishell, t_token *token)
 	if (fd_out != 1 && fd_out < 0)
 		printf("error tontito");
 	token = token->next;
-	minishell->fd_in = fd_in;
-	minishell->fd_out = fd_out;
+	// minishell->fd_in = fd_in;
+	// minishell->fd_out = fd_out;
 	return (token);
 }
 
@@ -51,6 +52,7 @@ t_token	*here_doc(t_token *token, t_minishell *minishell)
 	int		len;
 
 	line = NULL;
+	(void)minishell;
 	fd = open (".here_doc.tmp", O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 		msj_error("FD doesn't exist\n");
@@ -69,7 +71,7 @@ t_token	*here_doc(t_token *token, t_minishell *minishell)
 	}
 	close (fd);
 	unlink(".here_doc.tmp");
-	minishell->fd_in = open("here_doc.tmp", O_RDONLY);
+	// minishell->fd_in = open("here_doc.tmp", O_RDONLY);
 	return (token->next);
 }
 

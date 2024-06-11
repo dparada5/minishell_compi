@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:49:38 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/11 11:50:24 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/11 17:40:45 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,23 @@ int	words(char *line, t_token **token)
 	int	i;
 
 	i = 0;
-	while (!ft_strchr("| <>\"'", line[i]) && line[i])
+	while (!ft_strchr("| <>", line[i]) && line[i])
 		i++;
 	create_token_list(token, T_W, ft_substr(line, 0, i));
 	return (i);
 }
 
-// int	quotes(char *line, t_token **token)
-// {
-// 	char	c;
-// 	int		i;
+int	quotes(t_token **tokens, char *line, char c)
+{
+	int		i;
 
-// 	i = 1;
-// 	c = line[0];
-// 	while (line[i] != c && line[i])
-// 		i++;
-// 	// if (line[i] == c && line[i + 1] == c)
-// 	// {
-// 	create_token_list(token, T_W, ft_substr(line, 1, (i++) - 1));
-// 	return (i);
-// }
+	i = 0;
+	while (line[i] == c)
+		i++;
+	if (i > 1)
+		create_token_list(tokens, T_W, ft_strdup(""));
+	return (i + 1);
+}
 
 int	tokens(char *line, t_token **token, int i)
 {
@@ -46,7 +43,7 @@ int	tokens(char *line, t_token **token, int i)
 		return (1);
 	}
 	else if (line[i] == '\'' || line[i] == '\"')
-		i += quotes(token, &line[i], line[i], 0);
+		i += quotes(token, &line[i], line[i]);
 	else if ((line[i + 1] == '<' && line[i] == '<') || \
 	(line[i] == '>' && line[i + 1] == '>'))
 	{
@@ -98,7 +95,6 @@ t_token	*get_tokens(char *line)
 			i += tokens(&line[i], &token, 0);
 		else
 			i += words(&line[i], &token);
-		printf("%c\n", line[i]);
 	}
 	printf_tokens(token);
 	token_next(token);

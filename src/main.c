@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:40:10 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/11 12:04:59 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/11 17:38:41 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_minishell(char **env, t_minishell *minishell)
 int	main(int argc, char **argv, char **env)
 {
 	t_minishell	minishell;
-
+	// char		*aux;
 	(void)argv;
 	(void)argc;
 	init_minishell(env, &minishell);
@@ -44,6 +44,10 @@ int	main(int argc, char **argv, char **env)
 		}
 		add_history(minishell.line);
 		states(minishell.line);
+		// aux = minishell.line;
+		// free(minishell.line);
+		minishell.line = rm_quotes(minishell.line, '\"', '\'');
+		printf("%s\n", minishell.line);
 		minishell.tokens = get_tokens(minishell.line);
 		if (!minishell.tokens)
 			return (0);

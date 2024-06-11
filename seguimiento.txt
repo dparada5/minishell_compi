@@ -1,12 +1,16 @@
-Paso 1: Encontrar compañero
-Paso 2: Saber funciones que vergas hacen
+Paso 1: Encontrar compañero leto
+Paso 2: Saber funciones que vergas hacen le
 
 
 acciones
 
-'''' da mal '' no existe
-''''ls da bien ejecuta ls
-'''' ls da mal '' no existe
+"ls''la"
+
+save_word tendria que
+encuentra una comilla y recorres hasta encontrar la ultima comilla, salis del estado comilla y joineas con lo anterior
+encontras comilla y te guardas todo lo aue encontraste antes en una auxiliar. SIEMPRE Y CUANDO NO HAYA ESPACIOS
+SPLIT POR COMILLAS Y ESPACIOS.
+encontras una comilla (siempre que no haya un espacio antes) y si habia algo antes se guarda. 
 
 
 crear flag de error como tobi
@@ -16,3 +20,8 @@ expandir variables de vergas
 
 los controles de errores como [127] etc 
 $? es una prueba
+
+
+
+si pinta:
+echo ""'$USER'""
