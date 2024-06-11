@@ -1,0 +1,18 @@
+Paso 1: Encontrar compañero
+Paso 2: Saber funciones que vergas hacen
+
+
+acciones
+
+'''' da mal '' no existe
+''''ls da bien ejecuta ls
+'''' ls da mal '' no existe
+
+
+crear flag de error como tobi
+imprimir error pero no exit
+
+expandir variables de vergas
+
+los controles de errores como [127] etc 
+$? es una prueba
