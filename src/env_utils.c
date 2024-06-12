@@ -28,3 +28,10 @@ int	ft_change_envvar(t_env *env, char *var_name, char *new_value)
 	aux->content = ft_strdup(new_value);
 	return (1);
 }
+
+void	ft_swap_envnodes(t_env *_previous, t_env *_actual, t_env *_next, t_env *_last)
+{
+	_previous->next = _next;
+	_next->next = _actual;
+	_actual->next = _last;
+}
