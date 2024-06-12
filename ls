@@ -1,0 +1,12 @@
+holi.txt
+lib
+ls
+Makefile
+minishell
+minishell.h
+minishell-parseo.md
+obj
+README.md
+seguimiento.txt
+src
+x

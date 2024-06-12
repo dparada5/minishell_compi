@@ -5,6 +5,9 @@ Paso 2: Saber funciones que vergas hacen le
 acciones
 
 "ls''la"
+ls"'"la
+flag que mientras no se haya cerrado no se eliminan caracteres.
+
 
 save_word tendria que
 encuentra una comilla y recorres hasta encontrar la ultima comilla, salis del estado comilla y joineas con lo anterior

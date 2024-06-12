@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:00:17 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/07 16:18:43 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/12 18:24:46 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_cmds	*new_cmd(int i, t_token *token)
 	if (!cmds->cmds || !cmds->cmds_flags)
 		return (NULL);
 	i = 0;
-	while (aux && aux->token == T_W)
+	while (aux && (aux->token == T_W || aux->token == T_DQ || aux->token == T_SQ))
 	{
 		cmds->cmds_flags[i] = ft_strdup(aux->content);
 		if (!cmds->cmds_flags[i])
@@ -85,10 +85,11 @@ t_token	*word_token(t_token *token, t_minishell *minishell)
 	t_cmds	*aux_cmd;
 
 	aux = token;
-	i = 0;
-	while (aux && aux->token == T_W)
+	i = 1;
+	while (aux && (aux->token == T_W || aux->token == T_DQ || aux->token == T_SQ))
 	{
-		i++;
+		if (aux->next && aux->next->flag == 0)
+			i++;
 		aux = aux->next;
 	}
 	if (minishell->cmds)
@@ -123,5 +124,5 @@ void	token_actions(t_minishell *minishell)
 		else if (aux && aux->token == T_DL)
 			aux = here_doc(aux->next, minishell);
 	}
-	// printf_cmds(minishell->cmds);
+	printf_cmds(minishell->cmds);
 }

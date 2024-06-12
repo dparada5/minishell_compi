@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 10:29:02 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/11 16:45:44 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/12 17:47:53 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef enum e_state_num
 typedef enum e_token_num
 {
 	T_W,
+	T_DQ,
+	T_SQ,
 	T_P,
 	T_G,
 	T_L,
@@ -58,6 +60,7 @@ typedef enum e_token_num
 
 typedef struct s_token
 {
+	int				flag;
 	t_token_num		token;
 	char			*content;
 	struct s_token	*next;
@@ -81,32 +84,36 @@ typedef struct s_env
 {
 	char			*key;
 	char			*content;
-	int				index;
 	struct s_env	*next;
 }				t_env;
 
 typedef struct s_minishell
 {
 	t_env		*env;
+	t_env		*exp;
 	t_token		*tokens;
 	t_cmds		*cmds;
 	char		*line;
 }				t_minishell;
 
 //int main(void);
+char	**ft_split_c(char const *s, char c, int i, int count);
 char	*rm_quotes(char *line, char d, char s);
-int	quotes(t_token **tokens, char *line, char c);
+void	quotes(t_token **tokens, char *line, char c, int *i);
 //------------------actions----------------------------------
 void	token_actions(t_minishell *minishell);
 t_token	*redirecc(t_minishell *minishell, t_token *token);
 t_token	*here_doc(t_token *token, t_minishell *minishell);
 //------------------token------------------------------------
+void	words(char *line, t_token **token, int *i, int flag);
 t_token	*get_tokens(char *line);
-void	create_token_list(t_token **token, t_token_num token_num, \
-char *content);
-t_token	*new_token(t_token_num token_num, char *content);
+void	create_token(t_token **token, t_token_num token_num, \
+char *content, int flag);
+t_token	*new_token(t_token_num token_num, char *content, int flag);
 t_token	**ft_lstadd_back_token(t_token **lst, t_token *new);
 void	token_next(t_token *token);
+int	greater_token(char *line, t_token **token, int *i, int flag);
+int	less_token(char *line, t_token **token, int *i, int flag);
 //------------------states-----------------------------------
 void	states(char *line);
 //------------------env--------------------------------------

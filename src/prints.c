@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:09:16 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/07 16:10:30 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/12 17:28:43 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ void	printf_tokens(t_token *token)
 	{
 		if (aux->token == T_W)
 			printf("Token:	W\t");
+		else if (aux->token == T_DQ)
+			printf("Token: DQ\t");
+		else if (aux->token == T_SQ)
+			printf("Token: SQ\t");
 		else if (aux->token == T_P)
 			printf("Token:	P\t");
 		else if (aux->token == T_G)
@@ -52,6 +56,7 @@ void	printf_tokens(t_token *token)
 			printf("Token:  DG\t");
 		else if (aux->token == T_DL)
 			printf("Token:	DL\t");
+		printf("Flag: %d\t", aux->flag);
 		printf("Content: %s\n", aux->content);
 		aux = aux->next;
 	}
