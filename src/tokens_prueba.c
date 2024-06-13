@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 17:30:55 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/12 18:53:30 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/13 19:13:43 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,24 @@ void	words(char *line, t_token **token, int *i, int flag)
 	int start;
 
 	start = *i;
-	if (*i > 0 && line[*i - 1] == ' ')
-		flag = 0;
-	while (!ft_strchr("| <>\"\'", line[*i]) && line[*i])
+	if (line[*i] == '\\' && line[*i + 1] == '\0')
+	{
+		create_token(token, T_W, ft_strdup(""), 2);
 		(*i)++;
-	create_token(token, T_W, ft_substr(line, start, *i - start), flag);
+	}
+	else if (line[*i] == '\\')
+	{
+		start = ++*i;
+		create_token(token, T_W, ft_substr(line, start, ++*i - start), flag);
+	}
+	else
+	{
+		while (!ft_strchr("| <>\"\'\\", line[*i]) && line[*i])
+			(*i)++;
+		if (line[*i] == ' '  && flag != 0)
+			flag = 0;
+		create_token(token, T_W, ft_substr(line, start, *i - start), flag);	
+	}
 }
 
 int	greater_token(char *line, t_token **token, int *i, int flag)
@@ -56,7 +69,7 @@ void	quotes(t_token **tokens, char *line, char c, int *i)
 	int	start;
 
 	flag = 1;
-	if (*i > 0 && line[*i - 1] == ' ')
+	if (*i > 0 && line[*i - 1] == ' ' && flag != 0)
 		flag = 0;
 	start = ++(*i);
 	while (line[*i] && line[*i] != c)

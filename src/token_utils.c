@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:00:36 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/12 18:56:07 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/13 15:24:38 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	token_next(t_token *token)
 	aux = token;
 	while (aux)
 	{
-		if (aux->next == NULL && aux->token != T_W && aux->token != T_DQ && aux->token != T_SQ)
+		if ((aux->next == NULL && aux->token != T_W && aux->token != T_DQ && aux->token != T_SQ) || aux->flag == 2)
 			msj_error(ERROR_EOF);
 		else if (aux->token == T_P && flag == 0)
 			msj_error(ERROR_UPIPE);

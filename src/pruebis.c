@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:58:49 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/11 18:57:57 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/13 18:21:04 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,32 @@ char	*rm_quotes(char *line, char d, char s)
 	dst = copy_quote(line, d, s, 0);
 	free(line);
 	return (dst);
+}
+int	quotes(t_token **tokens, char *line, char c, int i)
+{
+	int		flag;
+	char	*aux1;
+	char	*aux2;
+	char	*buffer;
+
+	buffer = count_quotes(line, c, &flag, &i);
+	if (buffer)
+		i = ft_strlen(line) - i;
+	while (flag > 0)
+	{
+		while (line[i] && line[i] == c)
+			i++;
+		aux1 = ft_substr(line, i, next_ocurrence(&line[i], c));
+		aux2 = buffer;
+		if (!aux2)
+			buffer = ft_strdup(aux1);
+		else
+			buffer = ft_strjoin(aux2, aux1);
+		flag--;
+		i += next_ocurrence(&line[i], c);
+		free(aux1);
+	}
+	if (buffer)
+		create_token_list(tokens, T_W, buffer);
+	return (i + 1);
 }

@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:09:16 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/12 17:28:43 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/13 15:28:11 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,22 @@ void	print_env(t_env *env)
 		RED, RST, aux->key, RED, RST, aux->content);
 		aux = aux->next;
 	}
+}
+
+void	print_state(t_state *state)
+{
+	if (state->type == S_S)
+		printf("STATE == START\n");
+	else if (state->type == S_W)
+		printf("STATE == WORD\n");
+	else if (state->type == S_QS)
+		printf("STATE == SIMPLE QUOT\n");
+	else if (state->type == S_DQ)
+		printf("STATE == DOBLE QUOTES\n");
+	else if (state->type == S_D)
+		printf("STATE == DOLAR\n");
+	else if (state->type == S_CD)
+		printf("STATE == COMILLA CON DOLAR\n");
+	else if (state->type == S_SU)
+		printf("STATE == SUMILERO (?\n");
 }

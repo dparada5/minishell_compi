@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:49:38 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/12 18:54:08 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/13 18:49:38 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ int	tokens(char *line, t_token **token, int *i)
 {
 	if (line[*i] == '|')
 	{
-		create_token(token, T_P, ft_strdup("|"), 1);
+		create_token(token, T_P, ft_strdup("|"), 0);
 		(*i)++;
 	}
 	else if (line[*i] == '\'' || line[*i] == '\"')
 		quotes(token, line, line[*i], i);
 	else if (line[*i] == '>')
-		greater_token(line, token, i, 1);
+		greater_token(line, token, i, 0);
 	else if (line[*i] == '<')
-		less_token(line, token, i, 1);
+		less_token(line, token, i, 0);
 	return (*i);
 }
 

@@ -4,22 +4,21 @@ Paso 2: Saber funciones que vergas hacen le
 
 acciones
 
-"ls''la"
-ls"'"la
-flag que mientras no se haya cerrado no se eliminan caracteres.
-
-
 save_word tendria que
 encuentra una comilla y recorres hasta encontrar la ultima comilla, salis del estado comilla y joineas con lo anterior
 encontras comilla y te guardas todo lo aue encontraste antes en una auxiliar. SIEMPRE Y CUANDO NO HAYA ESPACIOS
 SPLIT POR COMILLAS Y ESPACIOS.
 encontras una comilla (siempre que no haya un espacio antes) y si habia algo antes se guarda. 
 
+terminar join de las cosas
 
 crear flag de error como tobi
 imprimir error pero no exit
 
 expandir variables de vergas
+agregar a token flag de expandir
+
+
 
 los controles de errores como [127] etc 
 $? es una prueba
@@ -28,3 +27,7 @@ $? es una prueba
 
 si pinta:
 echo ""'$USER'""
+
+
+comandos
+modifico la lista de tokens como tobi o dejo y hago como mati? o busco la manera de hacerlo
