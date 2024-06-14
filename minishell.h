@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 10:29:02 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/14 16:05:28 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 16:38:35 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ typedef struct s_minishell
 	t_token		*tokens;
 	t_cmds		*cmds;
 	char		*line;
+	int			fd_in;
+	int			fd_out;
 }				t_minishell;
 
 //int main(void);

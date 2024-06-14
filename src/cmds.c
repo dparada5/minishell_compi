@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:00:17 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/14 12:00:22 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 16:20:08 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ t_cmds	*new_cmd(int i, char **matrix)
 	}
 	ft_free(matrix);
 	cmds->cmds_flags[i] = NULL;
+	cmds->fd_in = STDIN_FILENO;
+	cmds->fd_out = STDOUT_FILENO;
 	cmds->next = NULL;
 	return (cmds);
 }
