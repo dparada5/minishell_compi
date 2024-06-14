@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 10:36:46 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/04 17:59:25 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 09:06:42 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,6 @@ t_env	**ft_lstadd_back_env(t_env **lst, t_env *new)
 	return (lst);
 }
 
-void	ft_lstclear_env(t_env **lst)
-{
-	t_env	*aux;
-
-	aux = *lst;
-	while (*lst)
-	{
-		aux = (*lst)->next;
-		free ((*lst)->key);
-		free ((*lst)->content);
-		free (*lst);
-		*lst = aux;
-	}
-	// free(lst);
-}
 
 t_env	*save_env(char **env)
 {

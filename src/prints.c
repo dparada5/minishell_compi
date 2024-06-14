@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:09:16 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/13 15:28:11 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 08:29:11 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	printf_tokens(t_token *token)
 		printf("Content: %s\n", aux->content);
 		aux = aux->next;
 	}
+	printf("------------------------------------------\n");
 }
 
 void	print_env(t_env *env)

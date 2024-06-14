@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:40:10 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/13 17:47:08 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 08:50:44 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		if (ft_strcmp("exit", minishell.line) == 0)
 		{
+			ft_free_minishell(&minishell);
 			write(1, "exit\n", 5);
 			exit (0);
 		}

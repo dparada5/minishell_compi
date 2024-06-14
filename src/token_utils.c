@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:00:36 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/13 15:24:38 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 09:06:25 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,6 @@ t_token	**ft_lstadd_back_token(t_token **lst, t_token *new)
 	return (lst);
 }
 
-void	ft_lstclear_token(t_token **lst)
-{
-	t_token	*aux;
-
-	aux = *lst;
-	while (*lst)
-	{
-		aux = (*lst)->next;
-		free((*lst)->content);
-		free(*lst);
-		*lst = aux;
-	}
-}
 
 void	token_next(t_token *token)
 {

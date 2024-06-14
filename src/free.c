@@ -6,11 +6,58 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:50:58 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/11 17:24:39 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 09:15:15 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	ft_lstclear_cmds(t_cmds **lst)
+{
+	t_cmds	*aux;
+	int		i;
+
+	i = 0;
+	aux = *lst;
+	while (*lst)
+	{
+		aux = (*lst)->next;
+		free((*lst)->cmds);
+		ft_free((*lst)->cmds_flags);
+		free(*lst);
+		*lst = aux;
+	}
+}
+
+void	ft_lstclear_token(t_token **lst)
+{
+	t_token	*aux;
+
+	aux = *lst;
+	while (*lst)
+	{
+		aux = (*lst)->next;
+		free((*lst)->content);
+		free(*lst);
+		*lst = aux;
+	}
+}
+
+void	ft_lstclear_env(t_env **lst)
+{
+	t_env	*aux;
+
+	aux = *lst;
+	while (*lst)
+	{
+		aux = (*lst)->next;
+		free ((*lst)->key);
+		free ((*lst)->content);
+		free (*lst);
+		*lst = aux;
+	}
+	// free(lst);
+}
 
 void	ft_free_minishell(t_minishell *minishell)
 {

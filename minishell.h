@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 10:29:02 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/14 08:07:52 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 08:32:43 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,11 @@ typedef struct s_minishell
 //int main(void);
 void	quotes(t_token **tokens, char *line, char c, int *i);
 //------------------actions----------------------------------
-char	**cmds(t_token *tokens, int i, char *buffer, int len);
+char	**cmds(t_token **tokens, int i, char *buffer, int len);
 t_token	*word_token(t_token *token, t_minishell *minishell);
 void	pop(t_token *token);
+t_cmds	*new_cmd(int i, char **matrix);
+t_cmds	*ft_lstadd_back_cmd(t_cmds **lst, t_cmds *new);
 
 void	token_actions(t_minishell *minishell);
 t_token	*redirecc(t_minishell *minishell, t_token *token);

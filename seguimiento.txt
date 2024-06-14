@@ -22,12 +22,3 @@ agregar a token flag de expandir
 
 los controles de errores como [127] etc 
 $? es una prueba
-
-
-
-si pinta:
-echo ""'$USER'""
-
-
-comandos
-modifico la lista de tokens como tobi o dejo y hago como mati? o busco la manera de hacerlo
