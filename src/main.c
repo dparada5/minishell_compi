@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:40:10 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/14 08:50:44 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 09:36:38 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 void	init_minishell(char **env, t_minishell *minishell)
 {
-	minishell->env = save_env(env);
+	minishell->env = save_env(env, 0);
 	if (!minishell->env)
 		return ;
-	minishell->exp = save_env(env);
+	minishell->exp = save_env(env, 0);
 	if (!minishell->env)
 		return ;
 	minishell->cmds = NULL;

@@ -6,11 +6,25 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 10:36:46 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/14 09:06:42 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 09:36:09 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+t_env	*ft_get_envvar(t_env *env, char *var_name)
+{
+	t_env	*aux;
+
+	aux = env;
+	while (aux)
+	{
+		if (!ft_strncmp(aux->key, var_name, ft_strlen(aux->key)))
+			return (aux);
+		aux = aux->next;
+	}
+	return (NULL);
+}
 
 t_env	*new_env(char *key, char *content)
 {
@@ -45,15 +59,12 @@ t_env	**ft_lstadd_back_env(t_env **lst, t_env *new)
 	return (lst);
 }
 
-
-t_env	*save_env(char **env)
+t_env	*save_env(char **env, int i)
 {
-	int		i;
 	int		j;
 	t_env	*environment;
 	t_env	*aux;
 
-	i = -1;
 	while (env[++i])
 	{
 		j = 0;

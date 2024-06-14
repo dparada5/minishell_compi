@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:50:58 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/14 09:15:15 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 09:35:07 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,10 @@ void	ft_lstclear_env(t_env **lst)
 		free (*lst);
 		*lst = aux;
 	}
-	// free(lst);
 }
 
 void	ft_free_minishell(t_minishell *minishell)
 {
-	// printf("%s\n", minishell->line);
 	if (minishell->tokens || minishell->cmds || minishell->env)
 	{
 		if (minishell->tokens)

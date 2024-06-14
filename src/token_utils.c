@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:00:36 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/14 09:06:25 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 09:32:18 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ t_token	**ft_lstadd_back_token(t_token **lst, t_token *new)
 	return (lst);
 }
 
-
 void	token_next(t_token *token)
 {
 	t_token	*aux;
@@ -55,15 +54,16 @@ void	token_next(t_token *token)
 	aux = token;
 	while (aux)
 	{
-		if ((aux->next == NULL && aux->token != T_W && aux->token != T_DQ && aux->token != T_SQ) || aux->flag == 2)
+		if ((aux->next == NULL && aux->token != T_W && aux->token != T_DQ \
+		&& aux->token != T_SQ) || aux->flag == 2)
 			msj_error(ERROR_EOF);
 		else if (aux->token == T_P && flag == 0)
 			msj_error(ERROR_UPIPE);
 		else if (aux->token >= T_G && aux->token <= T_DL)
 		{
-			if (aux->next != NULL && aux->next->token != T_W && aux->next->token != T_DQ && aux->next->token != T_SQ)
+			if (aux->next != NULL && aux->next->token != T_W \
+			&& aux->next->token != T_DQ && aux->next->token != T_SQ)
 				msj_error(ERROR_UT);
-			
 		}
 		else if (aux->token == T_P && aux->next && aux->next->token == T_P)
 			msj_error(ERROR_UT);

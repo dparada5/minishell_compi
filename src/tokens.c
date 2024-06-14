@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokens_prueba.c                                    :+:      :+:    :+:   */
+/*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 17:30:55 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/14 08:15:12 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 09:30:21 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	words(char *line, t_token **token, int *i, int flag)
 {
-	int start;
+	int	start;
 
 	start = *i;
-	if (*i > 0 && line[*i - 1] == ' '  && flag != 0)
+	if (*i > 0 && line[*i - 1] == ' ' && flag != 0)
 		flag = 0;
 	if (line[*i] == '\\' && line[*i + 1] == '\0')
 	{
@@ -33,7 +33,7 @@ void	words(char *line, t_token **token, int *i, int flag)
 	{
 		while (!ft_strchr("| <>\"\'\\", line[*i]) && line[*i])
 			(*i)++;
-		create_token(token, T_W, ft_substr(line, start, *i - start), flag);	
+		create_token(token, T_W, ft_substr(line, start, *i - start), flag);
 	}
 }
 
@@ -65,7 +65,7 @@ int	less_token(char *line, t_token **token, int *i, int flag)
 
 void	quotes(t_token **tokens, char *line, char c, int *i)
 {
-	int flag;
+	int	flag;
 	int	start;
 
 	flag = 1;
