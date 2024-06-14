@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 10:29:02 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/13 18:35:14 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 08:07:52 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	quotes(t_token **tokens, char *line, char c, int *i);
 //------------------actions----------------------------------
 char	**cmds(t_token *tokens, int i, char *buffer, int len);
 t_token	*word_token(t_token *token, t_minishell *minishell);
+void	pop(t_token *token);
 
 void	token_actions(t_minishell *minishell);
 t_token	*redirecc(t_minishell *minishell, t_token *token);

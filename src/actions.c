@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:00:17 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/13 19:17:33 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 08:13:14 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,17 +132,15 @@ char	**cmds(t_token *tokens, int i, char *buffer, int len)
 	{
 		if (aux->content)
 		{
-			if (!buffer)
-				buffer = ft_strdup(aux->content);
+			buffer = ft_strdup(aux->content);
 			while (is_join (aux->next) == 1)
 			{
 				aux2 = buffer;
 				buffer = ft_strjoin(aux2, aux->next->content);
-				
-				aux = aux->next;
+				pop(aux);
 			}
 			matrix[i] = ft_strdup(buffer);
-			printf("en cmds %s\n", matrix[i]);
+			// printf("en cmds %s\n", matrix[i]);
 			i++;
 		}
 		len--;

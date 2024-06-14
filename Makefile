@@ -6,7 +6,7 @@
 #    By: dparada <dparada@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/31 11:04:19 by dparada           #+#    #+#              #
-#    Updated: 2024/06/13 18:21:19 by dparada          ###   ########.fr        #
+#    Updated: 2024/06/14 08:07:05 by dparada          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ BOLD	= \033[1m
 RED		= \033[31;1m
 
 SRC_FILES = main token token_utils error env states actions prints \
-redirecc free quotes tokens_prueba token_quotes
+redirecc free quotes tokens_prueba token_quotes pruebis
 
 #SRC_FILES_BONUS = main 
 
