@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 10:29:02 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/14 09:37:15 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 16:05:28 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,12 @@ typedef struct s_minishell
 }				t_minishell;
 
 //int main(void);
+
+//------------------variable expand--------------------------
+void	expansion(t_token *token, t_minishell *minishell);
+char	*is_not_expandable(t_token *token, int *i);
+char	*does_not_exist(t_token *token, char *var, int *i);
+char	*expand(t_token *token, t_env *aux_env, int *i, int l);
 //------------------actions----------------------------------
 void	token_actions(t_minishell *minishell);
 //_____cmds__________________________________________________

@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:00:17 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/14 09:06:09 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 12:00:22 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	token_actions(t_minishell *minishell)
 	aux = minishell->tokens;
 	while (aux)
 	{
-		if (aux->token == T_W)
+		if (aux->token == T_W || aux->token == T_DQ || aux->token == T_SQ)
 			aux = word_token(aux, minishell);
 		if (aux && aux->token == T_P)
 			aux = aux->next;

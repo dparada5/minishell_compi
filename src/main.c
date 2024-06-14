@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:40:10 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/14 09:36:38 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 16:07:39 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,15 @@ int	main(int argc, char **argv, char **env)
 {
 	t_minishell	minishell;
 	char		**split;
+	int			i;
 	
 	// char		*aux;
 	(void)argv;
 	(void)argc;
+	i = 0;
 	split = NULL;
 	init_minishell(env, &minishell);
-	minishell.line = readline("minishell$ ");
+	minishell.line = readline("minishell> ");
 	while (minishell.line)
 	{
 		if (!ft_strlen(minishell.line))
@@ -54,9 +56,15 @@ int	main(int argc, char **argv, char **env)
 		minishell.tokens = get_tokens(minishell.line);
 		if (!minishell.tokens)
 			return (0);
-		token_actions(&minishell);
+		expansion(minishell.tokens, &minishell);
+		printf_tokens(minishell.tokens);
+		// token_actions(&minishell);
 		ft_free_minishell(&minishell);
 		minishell.line = readline("minishell$ ");
+		// init_minishell(env, &minishell);
+		// if (i == 1)
+		// 	exit (0);
+		i++;
 	}
 	rl_clear_history();
 }
