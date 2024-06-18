@@ -5,89 +5,157 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 16:13:37 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/14 09:53:17 by dparada          ###   ########.fr       */
+/*   Created: 2024/06/04 13:00:17 by dparada           #+#    #+#             */
+/*   Updated: 2024/06/18 18:53:19 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	pop(t_token *token)
+t_token	*open_infile(t_token *token, t_cmds *cmds)
+{
+	token = token->next;
+	if (cmds->fd_in)
+		close (cmds->fd_in);
+	cmds->fd_in = open(token->content, O_RDONLY);
+	if (cmds->fd_in < 0)
+		msj_error(ERROR_FD);
+	return (token);
+}
+
+t_token	*open_append(t_token *token, t_cmds *cmds)
+{
+	token = token->next;
+	if (cmds->fd_out)
+		close (cmds->fd_out);
+	cmds->fd_out = open(token->content, O_RDWR | O_CREAT | O_APPEND, 0644);
+	if (cmds->fd_out < 0)
+		msj_error(ERROR_FD);
+	return (token);
+}
+
+t_token	*open_trunc(t_token *token, t_cmds *cmds)
+{
+	token = token->next;
+	if (cmds->fd_out)
+		close (cmds->fd_out);
+	cmds->fd_out = open(token->content, O_RDWR | O_CREAT | O_TRUNC, 0644);
+	if (cmds->fd_out < 0)
+		msj_error(ERROR_FD);
+	return (token);
+}
+
+t_token	*open_to_close(t_token *token)
+{
+	int	fd;
+
+	fd = 0;
+	if (token->token == T_G)
+	{
+		token = token->next;
+		fd = open(token->content, O_RDWR | O_CREAT | O_TRUNC, 0644);
+	}
+	else if (token->token == T_DG)
+	{
+		token = token->next;
+		fd = open(token->content, O_RDWR | O_CREAT | O_APPEND, 0644);
+	}
+	else if (token->token == T_L)
+	{
+		token = token->next;
+		fd = open(token->content, O_RDONLY);
+	}
+	// else if (crear heredoc)
+	if (fd > 0)
+		close(fd);
+	return (token);
+}
+
+void	file_descriptor(t_cmds *cmds, t_token *tokens)
 {
 	t_token	*aux;
 
-	aux = token->next;
-	token->next = aux->next;
-	aux->next = NULL;
-	ft_lstclear_token(&aux);
-}
-
-int	is_join(t_token *tokens)
-{
-	if (tokens && (tokens->token == T_W \
-	|| tokens->token == T_DQ || tokens->token == T_SQ))
+	aux = tokens;
+	while (aux && aux->token != T_P)
 	{
-		if (tokens->flag == 1 && tokens->content)
-			return (1);
+		if (aux->token == T_DG)
+			aux = open_trunc(aux, cmds);
+		else if (aux->token == T_L)
+			aux = open_infile(aux, cmds);
+		else if (aux->token == T_G)
+			aux = open_append(aux, cmds);
+		else if (aux->token == T_DL)
+			aux = here_doc(aux, NULL);
+		aux = aux->next;
 	}
-	return (0);
 }
 
-t_token	*word_token(t_token *token, t_minishell *minishell)
+t_cmds	*new_cmd(int i, char **matrix, t_token *tokens)
+{
+	t_cmds	*cmds;
+
+	cmds = malloc(sizeof(t_cmds));
+	if (!cmds)
+		return (NULL);
+	cmds->cmds = ft_strdup(matrix[0]);
+	cmds->cmds_flags = malloc (sizeof(char *) * (i + 1));
+	if (!cmds->cmds || !cmds->cmds_flags)
+		return (NULL);
+	i = 0;
+	while (matrix[i])
+	{
+		cmds->cmds_flags[i] = ft_strdup(matrix[i]);
+		if (!cmds->cmds_flags[i])
+			return (NULL);
+		i++;
+	}
+	ft_free(matrix);
+	cmds->cmds_flags[i] = NULL;
+	cmds->fd_in = STDIN_FILENO;
+	cmds->fd_out = STDOUT_FILENO;
+	file_descriptor(cmds, tokens);
+	cmds->next = NULL;
+	return (cmds);
+}
+
+t_cmds	*ft_lstadd_back_cmd(t_cmds **lst, t_cmds *new)
+{
+	t_cmds	*aux;
+
+	aux = *lst;
+	if (!(*lst))
+		(*lst) = new;
+	else if (*lst)
+	{
+		while ((*lst)->next)
+			(*lst) = (*lst)->next;
+		(*lst)->next = new;
+		(*lst) = aux;
+	}
+	return (*lst);
+}
+
+void	token_actions(t_minishell *minishell)
 {
 	t_token	*aux;
 	int		i;
-	char	**split;
-	t_cmds	*aux_cmd;
 
-	aux = token;
 	i = 0;
-	while (aux && (aux->token == T_W \
-	|| aux->token == T_DQ || aux->token == T_SQ))
+	aux = minishell->tokens;
+	while (aux)
 	{
-		if (is_join(aux->next) == 0)
-			i++;
-		aux = aux->next;
+		if (aux && aux->token == T_P)
+			aux = aux->next;
+		else
+			aux = command_create(aux, minishell);
+		// else if (aux && aux->token == T_G)
+		// 	aux = open_append(aux, NULL);
+		// else if (aux && aux->token == T_L)
+		// 	aux = open_infile(aux, )
+		// else if (aux && aux->token == T_DG)
+		// 	aux = redirecc(minishell, aux);
+		// else if (aux && aux->token == T_DL)
+		// 	aux = here_doc(aux->next, minishell);
 	}
-	split = cmds(&token, 0, NULL, i);
-	if (minishell->cmds)
-	{
-		aux_cmd = new_cmd(i, split);
-		if (!aux_cmd)
-			return (NULL);
-		ft_lstadd_back_cmd(&minishell->cmds, aux_cmd);
-	}
-	else
-		minishell->cmds = new_cmd(i, split);
-	return (aux);
-}
-
-char	**cmds(t_token **tokens, int i, char *buffer, int len)
-{
-	t_token	*aux;
-	char	**matrix;
-	char	*aux2;
-
-	aux = *tokens;
-	matrix = malloc (sizeof(char *) * (len + 1));
-	if (!matrix)
-		return (NULL);
-	while (len-- > 0)
-	{
-		if ((*tokens)->content)
-		{
-			buffer = ft_strdup((*tokens)->content);
-			while (is_join ((*tokens)->next) == 1)
-			{
-				aux2 = buffer;
-				buffer = ft_strjoin(aux2, (*tokens)->next->content);
-				pop(*tokens);
-			}
-			matrix[i++] = ft_strdup(buffer);
-			free(buffer);
-		}
-		(*tokens) = (*tokens)->next;
-	}
-	matrix[i] = NULL;
-	return (matrix);
+	printf_cmds(minishell->cmds);
 }

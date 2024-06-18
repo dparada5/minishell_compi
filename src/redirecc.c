@@ -6,42 +6,38 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:50:53 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/14 16:38:54 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/18 15:35:57 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_token	*redirecc(t_minishell *minishell, t_token *token)
+t_token	*redirecc(t_token *token)
 {
-	int	fd_out;
-	int	fd_in;
-
-	fd_in = 0;
-	fd_out = 1;
-	(void)minishell;
+	int	fd[2];
+	
+	fd[0] = 0;
+	fd[1] = 1;
 	if (token->token == T_G)
 	{
 		token = token->next;
-		fd_out = open(token->content, O_RDWR | O_CREAT | O_TRUNC, 0644);
+		fd[1] = open(token->content, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	}
 	else if (token->token == T_DG)
 	{
 		token = token->next;
-		fd_out = open(token->content, O_RDWR | O_CREAT | O_APPEND, 0644);
+		fd[1] = open(token->content, O_RDWR | O_CREAT | O_APPEND, 0644);
 	}
 	else if (token->token == T_L)
 	{
 		token = token->next;
-		fd_in = open(token->content, O_RDONLY);
+		fd[0] = open(token->content, O_RDONLY);
 	}
-	if (fd_in != 0 && fd_in < 0)
+	if (fd[0] != 0 && fd[0] < 0)
 		printf("error tontito");
-	if (fd_out != 1 && fd_out < 0)
+	if (fd[1] != 1 && fd[1] < 0)
 		printf("error tontito");
 	token = token->next;
-	// minishell->fd_in = fd_in;
-	// minishell->fd_out = fd_out;
 	return (token);
 }
 
