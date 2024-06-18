@@ -1,6 +1,9 @@
 Paso 1: Encontrar compañero leto
 Paso 2: Saber funciones que vergas hacen le
 
+cambiando cosas del guardado de comandos
+revisar bucle infinito con ls > cat
+
 crear flag de error como tobi
 imprimir error pero no exit
 

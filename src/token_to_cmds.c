@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:00:17 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/18 18:53:19 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/18 20:14:27 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_token	*open_append(t_token *token, t_cmds *cmds)
 
 t_token	*open_trunc(t_token *token, t_cmds *cmds)
 {
+	printf("llego");
 	token = token->next;
 	if (cmds->fd_out)
 		close (cmds->fd_out);
@@ -79,11 +80,15 @@ void	file_descriptor(t_cmds *cmds, t_token *tokens)
 	while (aux && aux->token != T_P)
 	{
 		if (aux->token == T_DG)
-			aux = open_trunc(aux, cmds);
+			aux = open_append(aux, cmds);
 		else if (aux->token == T_L)
 			aux = open_infile(aux, cmds);
 		else if (aux->token == T_G)
-			aux = open_append(aux, cmds);
+		{
+			printf("holi\n");
+			aux = open_trunc(aux, cmds);
+		
+		}
 		else if (aux->token == T_DL)
 			aux = here_doc(aux, NULL);
 		aux = aux->next;

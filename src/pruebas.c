@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:46:28 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/18 18:56:20 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/18 20:12:06 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_token	*command_words(t_token *aux, int i, t_minishell *minishell, t_token *tok
 			aux = aux->next;
 		if (is_join(aux->next) == 0)
 			i++;
+		printf("%s\n", aux->content);
 		aux = aux->next;
 	}
 	split = cmds(save, 0, NULL, i);
@@ -70,6 +71,7 @@ t_token	*command_create(t_token *token, t_minishell *minishell)
 	}
 	if (!aux)
 		return (aux);
-	aux = command_words(aux, 0, minishell, token);
+	aux = command_words(aux, 1, minishell, token);
+	//puede llegar a ser un error hacer i = 1;
 	return (aux);
 }
