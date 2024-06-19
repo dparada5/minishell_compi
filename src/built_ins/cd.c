@@ -18,20 +18,16 @@ int	ft_cd_dir(char	*pre_path, char *end_path, t_env *env)
 	free (aux);
 	return (return_value);
 }
-//Hay que ver como reducir esta mierda en varias funciones para que la jodida norminette no se queje
-int	ft_cd(t_minishell *minishell)
+
+int	ft_cd(t_minishell *minishell, t_env *env, int error_check)
 {
-	t_env	*env;
 	t_env	*pwd;
 	t_env	*oldpwd;
 	char	*aux_pwd;
 	char	*new_dir;
-	int		error_check;
 
-	env = minishell->env;
 	pwd = ft_get_envvar(env, "PWD");
 	oldpwd = ft_get_envvar(env, "OLDPWD");
-	aux_pwd = NULL;
 	new_dir = minishell->cmds->cmds_flags[1];
 	if (!new_dir || !ft_strncmp("~", new_dir, ft_strlen(new_dir)))
 	{

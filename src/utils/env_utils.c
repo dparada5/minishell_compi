@@ -6,7 +6,7 @@
 /*   By: malena-b <mario3d93@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:18:29 by malena-b          #+#    #+#             */
-/*   Updated: 2024/06/18 13:21:32 by malena-b         ###   ########.fr       */
+/*   Updated: 2024/06/19 11:44:25 by malena-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ int	ft_change_envvar(t_env *env, char *var_name, char *new_value)
 	return (1);
 }
 
-void	ft_swap_envnodes(t_env *_previous, t_env *_actual, t_env *_next, t_env *_last)
+void	ft_swap_envnodes(t_env *prev, t_env *act, t_env *next, t_env *last)
 {
-	_previous->next = _next;
-	_next->next = _actual;
-	_actual->next = _last;
+	prev->next = next;
+	next->next = act;
+	act->next = last;
 }
 
 //Me he tenido que crear esta función por que para el export

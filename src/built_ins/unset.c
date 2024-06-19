@@ -18,7 +18,7 @@ void	ft_check_and_delete(t_env **envxp, char *key)
 			free(runner->content);
 			free(runner->key);
 			free(runner);
-			break;
+			break ;
 		}
 		previous = runner;
 		runner = runner->next;
