@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:50:58 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/14 15:26:08 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/19 18:28:00 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	ft_free_minishell(t_minishell *minishell)
 			ft_lstclear_token(&minishell->tokens);
 		// if (minishell->env)
 		// 	ft_lstclear_env(&minishell->env);
+		// if (minishell->exp)
+		// 	ft_lstclear_env(&minishell->exp);
 		if (minishell->cmds)
 			ft_lstclear_cmds(&minishell->cmds);
 		if (minishell->line)

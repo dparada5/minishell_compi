@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 10:36:46 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/14 09:36:09 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/19 18:52:34 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_env	*new_env(char *key, char *content)
 {
 	t_env	*env;
 
-	env = malloc (sizeof(t_env));
+	env = ft_calloc(sizeof(t_env), 1);
 	if (!env)
 		return (NULL);
 	env->key = ft_strdup(key);

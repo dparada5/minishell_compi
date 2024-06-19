@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:40:10 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/19 17:40:51 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/19 17:55:49 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,11 @@ int	main(int argc, char **argv, char **env)
 		}
 		add_history(minishell->line);
 		states(minishell->line);
-		// if (i++ ==  2)
-		// 	exit (0);
 		minishell->tokens = get_tokens(minishell->line);
 		if (!minishell->tokens)
 			return (0);
 		expansion(minishell->tokens, minishell);
 		token_actions(minishell);
-		// printf_tokens(minishell->tokens);
-		// printf_cmds("main: ", minishell->cmds);
 		ft_free_minishell(minishell);
 		minishell->line = readline("minishell$ ");
 	}

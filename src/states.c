@@ -6,13 +6,11 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 14:47:06 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/13 15:31:56 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/19 17:58:54 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-// int	save_word(char *line)
 
 int	state_word(t_state *state, char *line)
 {

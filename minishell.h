@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 10:29:02 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/19 17:39:27 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/19 17:55:13 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ void	token_actions(t_minishell *minishell);
 //_____cmds__________________________________________________
 char	**cmds(t_token *tokens, int i, char *buffer, int len);
 t_token	*word_token(t_token *token, t_minishell *minishell);
-char	*pop(t_token *token, char *buffer);
 t_cmds	*new_cmd(int i, char **matrix, t_token *tokens);
 t_cmds	*ft_lstadd_back_cmd(t_cmds **lst, t_cmds *new);
 

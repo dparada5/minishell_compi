@@ -6,13 +6,13 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:13:37 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/19 17:27:40 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/19 18:52:44 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*pop(t_token *token, char *buffer)
+static char	*pop(t_token *token, char *buffer)
 {
 	t_token	*aux;
 	char	*string;
@@ -25,46 +25,7 @@ char	*pop(t_token *token, char *buffer)
 	return (string);
 }
 
-// int	is_join(t_token *tokens)
-// {
-// 	if (tokens && (tokens->token == T_W \
-// 	|| tokens->token == T_DQ || tokens->token == T_SQ))
-// 	{
-// 		if (tokens->flag == 1 && tokens->content)
-// 			return (1);
-// 	}
-// 	else
-// 		return (2);
-// 	return (0);
-// }
-
-// t_token	*word_token(t_token *token, t_minishell *minishell, int i)
-// {
-// 	t_token	*aux;
-// 	char	**split;
-// 	t_cmds	*aux_cmd;
-
-// 	aux = token;
-// 	while (aux && aux->token != T_P)
-// 	{
-// 		if (aux->token >= T_G && aux->token <= T_DL)
-// 			aux = aux->next;
-// 		if (is_join(aux->next) == 0)
-// 			i++;
-// 		aux = aux->next;
-// 	}
-// 	split = cmds(&token, 0, NULL, i);
-// 	if (minishell->cmds)
-// 	{
-// 		aux_cmd = new_cmd(i, split);
-// 		if (!aux_cmd)
-// 			return (NULL);
-// 		ft_lstadd_back_cmd(&minishell->cmds, aux_cmd);
-// 	}
-// 	else
-// 		minishell->cmds = new_cmd(i, split);
-// 	return (aux);
-// }
+// static void	check_join(char *buffer, t_token *aux, int i, char **matrix)
 
 char	**cmds(t_token *tokens, int i, char *buffer, int len)
 {
@@ -73,7 +34,7 @@ char	**cmds(t_token *tokens, int i, char *buffer, int len)
 	char	*aux2;
 
 	aux = tokens;
-	matrix = malloc (sizeof(char *) * (len + 1));
+	matrix = ft_calloc(sizeof(char *) * (len + 1), 1);
 	if (!matrix)
 		return (NULL);
 	while (aux && aux->token != T_P)
