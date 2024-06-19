@@ -1,7 +1,0 @@
-llegoCommand: ls
-	Flags: ls
-Token:	W	Flag: 1	Content: ls
-Token:	G	Flag: 0	Content: >
-Token:	W	Flag: 0	Content: cat
-------------------------------------------
-[?2004hminishell$ ^C[?2004l

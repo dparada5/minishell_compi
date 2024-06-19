@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:00:17 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/18 20:14:27 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/19 17:40:00 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_token	*open_infile(t_token *token, t_cmds *cmds)
 {
 	token = token->next;
-	if (cmds->fd_in)
+	if (cmds->fd_in != 0)
 		close (cmds->fd_in);
 	cmds->fd_in = open(token->content, O_RDONLY);
 	if (cmds->fd_in < 0)
@@ -26,7 +26,7 @@ t_token	*open_infile(t_token *token, t_cmds *cmds)
 t_token	*open_append(t_token *token, t_cmds *cmds)
 {
 	token = token->next;
-	if (cmds->fd_out)
+	if (cmds->fd_out != 1)
 		close (cmds->fd_out);
 	cmds->fd_out = open(token->content, O_RDWR | O_CREAT | O_APPEND, 0644);
 	if (cmds->fd_out < 0)
@@ -38,7 +38,7 @@ t_token	*open_trunc(t_token *token, t_cmds *cmds)
 {
 	printf("llego");
 	token = token->next;
-	if (cmds->fd_out)
+	if (cmds->fd_out != 1)
 		close (cmds->fd_out);
 	cmds->fd_out = open(token->content, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (cmds->fd_out < 0)
@@ -162,5 +162,5 @@ void	token_actions(t_minishell *minishell)
 		// else if (aux && aux->token == T_DL)
 		// 	aux = here_doc(aux->next, minishell);
 	}
-	printf_cmds(minishell->cmds);
+	printf_cmds("en token to cmds", minishell->cmds);
 }

@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:00:36 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/14 09:32:18 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/19 17:42:29 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,29 +71,3 @@ void	token_next(t_token *token)
 		flag = 1;
 	}
 }
-
-// void	printf_tokens(t_token *token)
-// {
-// 	t_token	*aux;
-
-// 	if (!token)
-// 		printf("no");
-// 	aux = token;
-// 	while (aux)
-// 	{
-// 		if (aux->token == T_W)
-// 			printf("Token:	W\t");
-// 		else if (aux->token == T_P)
-// 			printf("Token:	P\t");
-// 		else if (aux->token == T_G)
-// 			printf("Token:	G\t");
-// 		else if (aux->token == T_L)
-// 			printf("Token:	L\t");
-// 		else if (aux->token == T_DG)
-// 			printf("Token:  DG\t");
-// 		else if (aux->token == T_DL)
-// 			printf("Token:	DL\t");
-// 		printf("Content: %s\n", aux->content);
-// 		aux = aux->next;
-// 	}
-// }

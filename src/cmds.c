@@ -6,18 +6,18 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:13:37 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/18 20:06:18 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/19 17:27:40 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*pop(t_token *token)
+char	*pop(t_token *token, char *buffer)
 {
 	t_token	*aux;
 	char	*string;
 
-	string = ft_strjoin(token->content, token->next->content);
+	string = ft_strjoin(buffer, token->next->content);
 	aux = token->next;
 	token->next = aux->next;
 	aux->next = NULL;
@@ -86,7 +86,7 @@ char	**cmds(t_token *tokens, int i, char *buffer, int len)
 			while (is_join (aux->next) == 1)
 			{
 				aux2 = buffer;
-				buffer = pop(aux);
+				buffer = pop(aux, buffer);
 			}
 			matrix[i++] = ft_strdup(buffer);
 			free(buffer);

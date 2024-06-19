@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:58:49 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/14 16:06:30 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/19 17:47:14 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ char	*is_not_expandable(t_token *token, int *i)
 	
 	l = 0;
 	j = 0;
-	printf("Entró a is_not_expandable\n");
 	aux = malloc(sizeof(char) * (ft_strlen(token->content) - 1) + 1);
 	if (!aux)
 		return (NULL);
@@ -45,7 +44,6 @@ char	*does_not_exist(t_token *token, char *var, int *i)
 	
 	l = 0;
 	j = 0;
-	ft_printf("Entró a does_not_exist %s-\n", var);
 	if (token->content[0] == '$')
 	{
 		aux = ft_strdup("");

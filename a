@@ -1,7 +1,0 @@
-Command: ls
-	Flags: ls
-Token:	W	Flag: 1	Content: ls
-Token:  DG	Flag: 0	Content: >>
-Token:	W	Flag: 0	Content: a
-------------------------------------------
-[?2004hminishell$ ^C[?2004l
