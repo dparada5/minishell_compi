@@ -41,7 +41,7 @@ void	ft_export_print(t_env **exp)
 
 //preguntarle a delfi por si tiene ya alguna función para eliminar las comillas/comillas dobles de un str
 //también hay que cambiar los args cuando delfi añada exp a la struct de minishell
-void	ft_export_insert(t_minishell *mshll, t_env *exp, char *str)
+void	ft_export_insert(t_minishell *mshll, char *str)
 {
 	char	*key;
 	char	*content;
@@ -49,14 +49,14 @@ void	ft_export_insert(t_minishell *mshll, t_env *exp, char *str)
 
 	i = 0;
 	if (ft_strchr(str, '=') == NULL)
-		ft_lstadd_back_env(&exp, new_env_exp(str, NULL));
+		ft_lstadd_back_env(&(mshll->exp), new_env_exp(str, NULL));
 	else
 	{
 		while (str[i] != '=')
 			i++;
 		key = ft_substr(str, 0, i);
 		content = ft_substr(str, i + 1, ft_strlen(str) - (i + 1));
-		ft_lstadd_back_env(&exp, new_env_exp(key, content));
+		ft_lstadd_back_env(&(mshll->exp), new_env_exp(key, content));
 		ft_lstadd_back_env(&(mshll->env), new_env_exp(key, content));
 		//verificar con delfi si en este caso me llegaría alojado con malloc para tener que liberarlo
 		//free(str);

@@ -6,7 +6,7 @@
 /*   By: malena-b <mario3d93@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 10:29:02 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/17 12:20:15 by malena-b         ###   ########.fr       */
+/*   Updated: 2024/06/20 14:36:42 by malena-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ typedef struct s_cmds
 {
 	char			*cmds;
 	char			**cmds_flags;
+	int				fd_in;
+	int				fd_out;
 	struct s_cmds	*next;
 }				t_cmds;
 
@@ -86,10 +88,10 @@ typedef struct s_env
 typedef struct s_minishell
 {
 	t_env		*env;
+	t_env		*exp;
 	t_token		*tokens;
 	t_cmds		*cmds;
-	int			fd_in;
-	int			fd_out;
+	int			comm_count;
 	char		*line;
 }				t_minishell;
 
