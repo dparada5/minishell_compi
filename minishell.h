@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 10:29:02 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/19 17:55:13 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/20 15:15:55 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 
 /*tanselmo y misaguir estuvieron aquí :)*/
 
-# define ERROR_FD	"FD doesn't exist"
+# define ERROR_FD	"FD doesn't exist\n"
 # define ERROR_EOF 	"syntax error: unexpected end of file\n"
 # define ERROR_UPIPE	"syntax error near unexpected token '|'\n"
 # define ERROR_UT	"syntax error near unexpected token\n"
@@ -68,7 +68,7 @@ typedef struct s_token
 
 typedef struct s_cmds
 {
-	char			*cmds;
+	char			*cmd;
 	char			**cmds_flags;
 	int				fd_in;
 	int				fd_out;
@@ -94,8 +94,7 @@ typedef struct s_minishell
 	t_token		*tokens;
 	t_cmds		*cmds;
 	char		*line;
-	int			fd_in;
-	int			fd_out;
+	int			comm_count;
 }				t_minishell;
 
 //int main(void);
@@ -108,16 +107,18 @@ char	*expand(t_token *token, t_env *aux_env, int *i, int l);
 //------------------actions----------------------------------
 void	token_actions(t_minishell *minishell);
 //_____cmds__________________________________________________
-char	**cmds(t_token *tokens, int i, char *buffer, int len);
-t_token	*word_token(t_token *token, t_minishell *minishell);
+char	**cmds(t_token *tokens, int i, int len);
+// t_token	*word_token(t_token *token, t_minishell *minishell);
 t_cmds	*new_cmd(int i, char **matrix, t_token *tokens);
 t_cmds	*ft_lstadd_back_cmd(t_cmds **lst, t_cmds *new);
-
-t_token	*open_to_close(t_token *token);
 int	is_join(t_token *tokens);
 t_token	*command_create(t_token *token, t_minishell *minishell);
-//_____redirecc__________________________________________________
-// t_token	*redirecc(t_minishell *minishell, t_token *token);
+
+//______fd_management_________________________________________
+t_token	*open_trunc(t_token *token, t_cmds *cmds);
+t_token	*open_append(t_token *token, t_cmds *cmds);
+t_token	*open_infile(t_token *token, t_cmds *cmds);
+t_token	*open_to_close(t_token *token);
 t_token	*here_doc(t_token *token, t_minishell *minishell);
 //------------------token------------------------------------
 void	words(char *line, t_token **token, int *i, int flag);

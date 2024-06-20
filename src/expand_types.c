@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pruebis.c                                          :+:      :+:    :+:   */
+/*   expand_types.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:58:49 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/19 17:47:14 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/20 17:44:26 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*is_not_expandable(t_token *token, int *i)
 	
 	l = 0;
 	j = 0;
-	aux = malloc(sizeof(char) * (ft_strlen(token->content) - 1) + 1);
+	aux = ft_calloc(sizeof(char) , (ft_strlen(token->content) - 1) + 1);
 	if (!aux)
 		return (NULL);
 	while (token->content[j] != '\\')
@@ -50,7 +50,7 @@ char	*does_not_exist(t_token *token, char *var, int *i)
 	}
 	else
 	{
-		aux = malloc(sizeof(char) * (ft_strlen(token->content) - (ft_strlen(var)) + 1) + 1);
+		aux = ft_calloc(sizeof(char), (ft_strlen(token->content) - (ft_strlen(var)) + 1) + 1);
 		if (!aux)
 			return (NULL);
 		while (token->content[j] != '$')
@@ -74,7 +74,7 @@ char	*expand(t_token *token, t_env *aux_env, int *i, int l)
 	j = 0;
 	len_str = ft_strlen(token->content);
 	total = (len_str - (ft_strlen(aux_env->key) + 1));
-	new_string = malloc(sizeof(char) * (total + ft_strlen(aux_env->content) + 1));
+	new_string = ft_calloc(sizeof(char), (total + ft_strlen(aux_env->content) + 1));
 	if (!new_string)
 		return (NULL);
 	if (token->content[0] != '$')

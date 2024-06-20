@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:50:58 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/19 18:28:00 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/20 15:02:38 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@ void	ft_lstclear_cmds(t_cmds **lst)
 	while (*lst)
 	{
 		aux = (*lst)->next;
-		free((*lst)->cmds);
+		free((*lst)->cmd);
 		ft_free((*lst)->cmds_flags);
+		if ((*lst)->fd_in != 0)
+			close ((*lst)->fd_in);
+		if ((*lst)->fd_out != 1)
+			close ((*lst)->fd_out);
 		free(*lst);
 		*lst = aux;
 	}

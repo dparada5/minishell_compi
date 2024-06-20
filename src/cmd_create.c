@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:46:28 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/20 15:18:40 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/20 13:51:12 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	is_join(t_token *tokens)
 		if (tokens->content && tokens->flag == 1)
 			return (1);
 		else
-			return (0);
+			return (2);
 	}
 	else
 		return (2);

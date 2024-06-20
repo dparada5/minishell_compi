@@ -6,7 +6,7 @@
 #    By: dparada <dparada@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/31 11:04:19 by dparada           #+#    #+#              #
-#    Updated: 2024/06/19 18:26:51 by dparada          ###   ########.fr        #
+#    Updated: 2024/06/20 12:40:57 by dparada          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ LIBFT = lib/LIBFT
 SRC_DIR = src/
 BONUS_DIR = src_bonus/
 OBJ_DIR = obj/
+MINISHELL_H = $(NAME).h
 LIB = -lreadline
 
 MAGENTA = \033[35;1m
@@ -54,7 +55,7 @@ $(NAME): compiling $(OBJ)
 		@$(CC) $(CFLAGS) $(OBJ) $(LIB) -L$(LIBFT) -lft -o $(NAME)
 		@echo "$(MAGENTA)Minishell compiled!$(RESET)"
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(MINISHELL_H)| $(OBJF)
 		@echo "$(BLUE)Compiling: $(RESET)$(notdir $<)"
 		@$(CC) $(CFLAGS) -c $< -o $@
 

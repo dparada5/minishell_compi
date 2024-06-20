@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:37:30 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/19 17:46:53 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/20 15:06:56 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*get_var(t_token *token, int *i, int len)
 		j++;
 		l++;
 	}
-	aux = malloc(sizeof(char) * (l + 1));
+	aux = ft_calloc(sizeof(char), (l + 1));
 	if (!aux)
 		return (NULL);
 	j = *i;

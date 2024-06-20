@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:00:36 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/19 17:42:29 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/20 15:12:08 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_token	*new_token(t_token_num token_num, char *content, int flag)
 {
 	t_token	*token;
 
-	token = malloc (sizeof(t_token));
+	token = ft_calloc (sizeof(t_token), 1);
 	if (!token)
 		return (NULL);
 	token->token = token_num;

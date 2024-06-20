@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:40:10 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/19 17:55:49 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/20 15:07:16 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	i = 0;
 	split = NULL;
-	minishell = malloc(sizeof(t_minishell));
+	minishell = ft_calloc(sizeof(t_minishell), 1);
 	init_minishell(env, minishell);
 	minishell->line = readline("minishell> ");
 	while (minishell->line)
