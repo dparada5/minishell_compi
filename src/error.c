@@ -6,17 +6,17 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 18:02:54 by dparada           #+#    #+#             */
-/*   Updated: 2024/05/30 12:46:16 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/21 12:24:11 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	msj_error(char *str)
+void	msj_error(char *str, t_minishell *minishell)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(str, 2);
-	exit (EXIT_FAILURE);
+	minishell->flag = 1;
 }
 
 //mensaje ede error pa errores

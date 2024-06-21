@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:00:17 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/14 12:00:22 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/21 12:22:50 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,14 @@ void	token_actions(t_minishell *minishell)
 			aux = word_token(aux, minishell);
 		if (aux && aux->token == T_P)
 			aux = aux->next;
-		else if (aux && aux->token == T_G)
-			aux = redirecc(minishell, aux);
-		else if (aux && aux->token == T_L)
-			aux = redirecc(minishell, aux);
-		else if (aux && aux->token == T_DG)
-			aux = redirecc(minishell, aux);
-		else if (aux && aux->token == T_DL)
-			aux = here_doc(aux->next, minishell);
+		// else if (aux && aux->token == T_G)
+		// 	aux = redirecc(minishell, aux);
+		// else if (aux && aux->token == T_L)
+		// 	aux = redirecc(minishell, aux);
+		// else if (aux && aux->token == T_DG)
+		// 	aux = redirecc(minishell, aux);
+		// else if (aux && aux->token == T_DL)
+		// 	aux = here_doc(aux->next, minishell);
 	}
 	printf_cmds(minishell->cmds);
 }

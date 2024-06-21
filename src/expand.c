@@ -6,13 +6,13 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:37:30 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/14 16:06:51 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/21 13:03:02 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*get_var(t_token *token, int *i, int len)
+static char	*get_var(t_token *token, int *i, int len, t_minishell *minishell)
 {
 	int	j;
 	int	l;
@@ -29,8 +29,8 @@ char	*get_var(t_token *token, int *i, int len)
 		l++;
 	}
 	aux = malloc(sizeof(char) * (l + 1));
-	if (!aux)
-		return (NULL);
+	if (!aux && minishell->flag == 0)
+		msj_error(MALLOC_FAILED, minishell);
 	j = *i;
 	l = 0;
 	while (++j <= len)
@@ -39,12 +39,12 @@ char	*get_var(t_token *token, int *i, int len)
 	return (aux);
 }
 
-char	*check_var(t_minishell *minishell, t_token *token, t_env *aux_env, int *i)
+static char	*check_var(t_minishell *minishell, t_token *token, t_env *aux_env, int *i)
 {
 	char	*aux;
 	char	*new_string;
 	
-	aux = get_var(token, i, *i);
+	aux = get_var(token, i, *i, minishell);
 	aux_env = ft_get_envvar(minishell->env, aux);
 	if (token->content[*i - 1] == '\\')
 		new_string = is_not_expandable(token, i - 1);
@@ -52,8 +52,8 @@ char	*check_var(t_minishell *minishell, t_token *token, t_env *aux_env, int *i)
 		new_string = does_not_exist(token, aux, i);
 	else
 		new_string = expand(token, aux_env, i, 0);
-	if (!new_string)
-		return (NULL);
+	if (!new_string && minishell->flag == 0)
+		msj_error(MALLOC_FAILED, minishell);
 	// *i += ft_strlen(aux_env->content);
 	// free(token->content);
 	return (new_string);
@@ -65,19 +65,20 @@ void	expansion(t_token *token, t_minishell *minishell)
 	t_token	*aux;
 
 	aux = token;
-	i = 0;
-	while (aux->content[i])
+	while (aux)
 	{
-		if (aux->content[i] == '$')
-			aux->content = check_var(minishell, aux, NULL, &i);
-		else
-			i++;
+		if (aux->token == T_W || aux->token == T_DQ)
+		{
+			i = 0;
+			while (aux->content[i])
+			{
+				if (aux->content[i] == '$')
+					aux->content = check_var(minishell, aux, NULL, &i);
+				else
+					i++;
+			}
+		}
+		aux = aux->next;
 	}
-	// while (aux)
-	// {
-	// 	if (aux->token == T_W || aux->token == T_DQ)
-	// 	{
-	// 	}
-	// }
 	
 }

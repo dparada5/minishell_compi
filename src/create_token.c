@@ -6,46 +6,57 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:49:38 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/14 16:07:45 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/21 13:02:12 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	tokens(char *line, t_token **token, int *i)
+int	tokens(char *line, t_token **token, int *i, t_minishell *minishell)
 {
+	int	flag;
+
+	flag = 0;
 	if (line[*i] == '|')
 	{
-		create_token(token, T_P, ft_strdup("|"), 0);
+		flag = create_token(token, T_P, ft_strdup("|"), 0);
 		(*i)++;
 	}
 	else if (line[*i] == '\'' || line[*i] == '\"')
-		quotes(token, line, line[*i], i);
+		flag = quotes(token, line, line[*i], i);
 	else if (line[*i] == '>')
-		greater_token(line, token, i, 0);
+		flag = greater_token(line, token, i, 0);
 	else if (line[*i] == '<')
-		less_token(line, token, i, 0);
+		flag = less_token(line, token, i, 0);
+	if (flag == 1)
+		msj_error(MALLOC_FAILED, minishell);
 	return (*i);
 }
 
-void	create_token(t_token **token, t_token_num token_num, \
+int	create_token(t_token **token, t_token_num token_num, \
 char *content, int flag)
 {
 	t_token	*aux;
 
 	if (!*token)
+	{	
 		*token = new_token(token_num, content, flag);
+		if (!*token)
+			return (1);
+	}
 	else
 	{
 		aux = new_token(token_num, content, flag);
 		if (!aux)
-			return ;
+			return (1);
 		ft_lstadd_back_token(token, aux);
 	}
 	free(content);
+	content = NULL;
+	return (0);
 }
 
-t_token	*get_tokens(char *line)
+t_token	*get_tokens(char *line, t_minishell *minishell)
 {
 	int		i;
 	t_token	*token;
@@ -57,11 +68,14 @@ t_token	*get_tokens(char *line)
 		while (line[i] == ' ')
 			i++;
 		if (ft_strchr("|<>\"'", line[i]))
-			tokens(line, &token, &i);
+			tokens(line, &token, &i, minishell);
 		else
-			words(line, &token, &i, 1);
+		{
+			if (words(line, &token, &i, 1) == 1)
+				msj_error(MALLOC_FAILED, minishell);
+		}
 	}
 	// printf_tokens(token);
-	token_next(token);
+	token_next(token, minishell);
 	return (token);
 }

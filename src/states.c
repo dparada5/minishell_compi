@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 14:47:06 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/13 15:31:56 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/21 12:55:17 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	state_word(t_state *state, char *line)
 	return (i);
 }
 
-int	simple_quote(t_state *state, char *line)
+int	simple_quote(t_state *state, char *line, t_minishell *minishell)
 {
 	int	i;
 
@@ -37,32 +37,27 @@ int	simple_quote(t_state *state, char *line)
 		i++;
 	if (line[i] == '\'')
 		state->type = S_W;
-	else
-		msj_error(ERROR_SQ);
+	else if (line[i] == '\0' && minishell->flag != 1)
+		msj_error(ERROR_DQ, minishell);
 	return (i + 1);
 }
 
-int	doble_quote(t_state *state, char *line)
+int	doble_quote(t_state *state, char *line, t_minishell *minishell)
 {
 	int	i;
 
 	i = 1;
-	if (line[i] == '$')
-		state->type = S_CD;
-	else
-	{
-		state->type = S_DQ;
-		while (line[i] != '\"' && line[i])
-			i++;
-		if (line[i] == '\"')
-			state->type = S_W;
-		else
-			msj_error(ERROR_DQ);
-	}
+	state->type = S_DQ;
+	while (line[i] != '\"' && line[i])
+		i++;
+	if (line[i] == '\"')
+		state->type = S_W;
+	else if (line[i] == '\0' && minishell->flag != 1)
+		msj_error(ERROR_DQ, minishell);
 	return (i + 1);
 }
 
-void	states(char *line)
+void	states(char *line, t_minishell *minishell)
 {
 	t_state	*state;
 	int		i;
@@ -77,9 +72,9 @@ void	states(char *line)
 		if (line[i] == '\\' && (line[i + 1] == '\'' || line[i + 1] == '\"'))
 			i += 2;
 		else if (line[i] == '\'')
-			i += simple_quote(state, &line[i]);
+			i += simple_quote(state, &line[i], minishell);
 		else if (line[i] == '\"')
-			i += doble_quote(state, &line[i]);
+			i += doble_quote(state, &line[i], minishell);
 		else if (!ft_strchr("|<> ", line[i]))
 			i += state_word(state, &line[i]);
 		else

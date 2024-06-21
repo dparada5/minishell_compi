@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:50:53 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/21 11:16:45 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/21 12:28:10 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_token	*here_doc(t_token *token, t_minishell *minishell)
 	line = NULL;
 	(void)minishell;
 	fd = open (".here_doc.tmp", O_RDWR | O_CREAT | O_TRUNC, 0644);
-	if (fd < 0)
-		msj_error("FD doesn't exist\n");
+	// if (fd < 0)
+		// msj_error("FD doesn't exist\n");
 	while (1)
 	{
 		write(1, "> ", 2);

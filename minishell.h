@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 10:29:02 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/21 11:14:33 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/21 12:51:14 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define ERROR_UT	"syntax error near unexpected token\n"
 # define ERROR_SQ	"unexpected EOF while looking for matching quote '''\n"
 # define ERROR_DQ	"unexpected EOF while looking for matching quote '\"'\n"
-
+# define MALLOC_FAILED "malloc failed.\n"
 typedef enum e_state_num
 {
 	S_S,
@@ -94,6 +94,7 @@ typedef struct s_minishell
 	t_token		*tokens;
 	t_cmds		*cmds;
 	char		*line;
+	int			flag;
 	int			comm_count;
 }				t_minishell;
 
@@ -116,23 +117,23 @@ t_cmds	*ft_lstadd_back_cmd(t_cmds **lst, t_cmds *new);
 t_token	*redirecc(t_minishell *minishell, t_token *token);
 t_token	*here_doc(t_token *token, t_minishell *minishell);
 //------------------token------------------------------------
-void	words(char *line, t_token **token, int *i, int flag);
-void	quotes(t_token **tokens, char *line, char c, int *i);
+int		words(char *line, t_token **token, int *i, int flag);
+int		quotes(t_token **tokens, char *line, char c, int *i);
 int		greater_token(char *line, t_token **token, int *i, int flag);
 int		less_token(char *line, t_token **token, int *i, int flag);
-t_token	*get_tokens(char *line);
-void	create_token(t_token **token, t_token_num token_num, \
+t_token	*get_tokens(char *line, t_minishell *minishell);
+int		create_token(t_token **token, t_token_num token_num, \
 char *content, int flag);
 //------------------token_utils------------------------------------
 t_token	*new_token(t_token_num token_num, char *content, int flag);
 t_token	**ft_lstadd_back_token(t_token **lst, t_token *new);
-void	token_next(t_token *token);
+void	token_next(t_token *token, t_minishell *minishell);
 //------------------states-----------------------------------
-void	states(char *line);
+void	states(char *line, t_minishell *minishell);
 //------------------env--------------------------------------
-t_env	*save_env(char **env, int i);
+t_env	*save_env(char **env, int i, t_minishell *minishell);
 //------------------utils------------------------------------
-void	msj_error(char *str);
+void	msj_error(char *str, t_minishell *minishell);
 //------------------memory free------------------------------
 void	ft_lstclear_env(t_env **lst);
 void	ft_lstclear_token(t_token **lst);
