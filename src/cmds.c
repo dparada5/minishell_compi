@@ -5,53 +5,67 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/04 13:00:17 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/21 12:22:50 by dparada          ###   ########.fr       */
+/*   Created: 2024/06/12 16:13:37 by dparada           #+#    #+#             */
+/*   Updated: 2024/06/21 14:09:51 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_cmds	*new_cmd(int i, char **matrix)
+static char	*pop(t_token *token, char *aux2)
 {
-	t_cmds	*cmds;
+	t_token	*aux;
+	char	*string;
 
-	cmds = malloc(sizeof(t_cmds));
-	if (!cmds)
-		return (NULL);
-	cmds->cmds = ft_strdup(matrix[0]);
-	cmds->cmds_flags = malloc (sizeof(char *) * (i + 1));
-	if (!cmds->cmds || !cmds->cmds_flags)
-		return (NULL);
-	i = 0;
-	while (matrix[i])
-	{
-		cmds->cmds_flags[i] = ft_strdup(matrix[i]);
-		if (!cmds->cmds_flags[i])
-			return (NULL);
-		i++;
-	}
-	ft_free(matrix);
-	cmds->cmds_flags[i] = NULL;
-	cmds->next = NULL;
-	return (cmds);
+	string = ft_strjoin(aux2, token->next->content);
+	aux = token->next;
+	token->next = aux->next;
+	aux->next = NULL;
+	ft_lstclear_token(&aux);
+	return (string);
 }
 
-t_cmds	*ft_lstadd_back_cmd(t_cmds **lst, t_cmds *new)
+static char	*check_join(t_token *aux)
 {
-	t_cmds	*aux;
-
-	aux = *lst;
-	if (!(*lst))
-		(*lst) = new;
-	else if (*lst)
+	char	*aux2;
+	char	*buffer;
+	
+	buffer = ft_strdup(aux->content);
+	while (is_join (aux->next) == 1)
 	{
-		while ((*lst)->next)
-			(*lst) = (*lst)->next;
-		(*lst)->next = new;
-		(*lst) = aux;
+		aux2 = buffer;
+		buffer = pop(aux, aux2);
+		aux2 = NULL;
 	}
-	return (*lst);
+	// matrix[i++] = ft_strdup(buffer);
+	// free(buffer);
+	// buffer = NULL;
+	return (buffer);
+}
+
+char	**cmds(t_token *tokens, int len, t_minishell *minishell)
+{
+	t_token	*aux;
+	int		i;
+	char	**matrix;
+
+	aux = tokens;
+	i = 0;
+	matrix = malloc(sizeof(char *) * (len + 1));
+	if (!matrix && minishell->flag != 1)
+		msj_error(MALLOC_FAILED, minishell);
+	while (aux && aux->token != T_P)
+	{
+		if (aux->token >= T_G && aux->token <= T_DL)
+			aux = aux->next;
+		else if (ft_strlen(aux->content) != 0)
+		{
+			matrix[i++] = check_join(aux);
+		}
+		aux = aux->next;
+	}
+	matrix[i] = NULL;
+	return (matrix);
 }
 
 void	token_actions(t_minishell *minishell)
@@ -63,18 +77,9 @@ void	token_actions(t_minishell *minishell)
 	aux = minishell->tokens;
 	while (aux)
 	{
-		if (aux->token == T_W || aux->token == T_DQ || aux->token == T_SQ)
-			aux = word_token(aux, minishell);
 		if (aux && aux->token == T_P)
 			aux = aux->next;
-		// else if (aux && aux->token == T_G)
-		// 	aux = redirecc(minishell, aux);
-		// else if (aux && aux->token == T_L)
-		// 	aux = redirecc(minishell, aux);
-		// else if (aux && aux->token == T_DG)
-		// 	aux = redirecc(minishell, aux);
-		// else if (aux && aux->token == T_DL)
-		// 	aux = here_doc(aux->next, minishell);
+		else
+			aux = command_create(aux, minishell);
 	}
-	printf_cmds(minishell->cmds);
 }

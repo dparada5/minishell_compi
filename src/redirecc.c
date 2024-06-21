@@ -6,13 +6,44 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:50:53 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/21 12:28:10 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/21 14:08:06 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+t_token *open_append(t_token *token, t_cmds *cmds, t_minishell *minishell)
+{
+	token = token->next;
+	if (cmds->fd_out != 1)
+		close(cmds->fd_out);
+	cmds->fd_out =  open(token->content, O_RDWR | O_CREAT | O_APPEND, 0644);
+	if (cmds->fd_out < 0)
+		msj_error(ERROR_FD, minishell);
+	return (token);
+}
 
+t_token *open_trunc(t_token *token, t_cmds *cmds, t_minishell *minishell)
+{
+	token = token->next;
+	if (cmds->fd_out != 1)
+		close(cmds->fd_out);
+	cmds->fd_out =  open(token->content, O_RDWR | O_CREAT | O_TRUNC, 0644);
+	if (cmds->fd_out < 0)
+		msj_error(ERROR_FD, minishell);
+	return (token);
+}
+
+t_token *open_infile(t_token *token, t_cmds *cmds, t_minishell *minishell)
+{
+	token = token->next;
+	if (cmds->fd_in != 0)
+		close(cmds->fd_in);
+	cmds->fd_in =  open(token->content, O_RDONLY);
+	if (cmds->fd_in < 0)
+		msj_error(ERROR_FD, minishell);
+	return (token);
+}
 
 t_token	*here_doc(t_token *token, t_minishell *minishell)
 {

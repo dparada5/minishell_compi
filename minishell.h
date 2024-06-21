@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 10:29:02 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/21 12:51:14 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/21 14:10:54 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,18 @@ char	*expand(t_token *token, t_env *aux_env, int *i, int l);
 //------------------actions----------------------------------
 void	token_actions(t_minishell *minishell);
 //_____cmds__________________________________________________
-char	**cmds(t_token **tokens, int i, char *buffer, int len);
+char	**cmds(t_token *token,int len, t_minishell *minishell);
 t_token	*word_token(t_token *token, t_minishell *minishell);
-void	pop(t_token *token);
-t_cmds	*new_cmd(int i, char **matrix);
+// void	pop(t_token *token);
+t_cmds	*new_cmd(int i, char **matrix, t_token *tokens, t_minishell *minishell);
 t_cmds	*ft_lstadd_back_cmd(t_cmds **lst, t_cmds *new);
+t_token	*command_create(t_token *token, t_minishell *minishell);
+int	is_join(t_token *tokens);
 //_____redirecc__________________________________________________
-t_token	*redirecc(t_minishell *minishell, t_token *token);
+t_token	*open_to_close(t_token *token);
+t_token *open_infile(t_token *token, t_cmds *cmds, t_minishell *minishell);
+t_token *open_trunc(t_token *token, t_cmds *cmds, t_minishell *minishell);
+t_token *open_append(t_token *token, t_cmds *cmds, t_minishell *minishell);
 t_token	*here_doc(t_token *token, t_minishell *minishell);
 //------------------token------------------------------------
 int		words(char *line, t_token **token, int *i, int flag);
