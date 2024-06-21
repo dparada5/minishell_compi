@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:50:58 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/20 15:02:38 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 15:26:08 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,8 @@ void	ft_lstclear_cmds(t_cmds **lst)
 	while (*lst)
 	{
 		aux = (*lst)->next;
-		free((*lst)->cmd);
+		free((*lst)->cmds);
 		ft_free((*lst)->cmds_flags);
-		if ((*lst)->fd_in != 0)
-			close ((*lst)->fd_in);
-		if ((*lst)->fd_out != 1)
-			close ((*lst)->fd_out);
 		free(*lst);
 		*lst = aux;
 	}
@@ -70,8 +66,6 @@ void	ft_free_minishell(t_minishell *minishell)
 			ft_lstclear_token(&minishell->tokens);
 		// if (minishell->env)
 		// 	ft_lstclear_env(&minishell->env);
-		// if (minishell->exp)
-		// 	ft_lstclear_env(&minishell->exp);
 		if (minishell->cmds)
 			ft_lstclear_cmds(&minishell->cmds);
 		if (minishell->line)

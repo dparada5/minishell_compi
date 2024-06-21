@@ -5,67 +5,53 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 16:13:37 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/20 15:15:28 by dparada          ###   ########.fr       */
+/*   Created: 2024/06/04 13:00:17 by dparada           #+#    #+#             */
+/*   Updated: 2024/06/14 12:00:22 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char	*pop(t_token *token, char *aux2)
+t_cmds	*new_cmd(int i, char **matrix)
 {
-	t_token	*aux;
-	char	*string;
+	t_cmds	*cmds;
 
-	string = ft_strjoin(aux2, token->next->content);
-	aux = token->next;
-	token->next = aux->next;
-	aux->next = NULL;
-	ft_lstclear_token(&aux);
-	return (string);
-}
-
-static char	*check_join(t_token *aux)
-{
-	char	*aux2;
-	char	*buffer;
-	
-	buffer = ft_strdup(aux->content);
-	while (is_join (aux->next) == 1)
-	{
-		aux2 = buffer;
-		buffer = pop(aux, aux2);
-		aux2 = NULL;
-	}
-	// matrix[i++] = ft_strdup(buffer);
-	// free(buffer);
-	// buffer = NULL;
-	return (buffer);
-}
-
-char	**cmds(t_token *tokens, int i, int len)
-{
-	t_token	*aux;
-	char	**matrix;
-
-	aux = tokens;
-	matrix = ft_calloc(sizeof(char *) * (len + 1), 1);
-	if (!matrix)
+	cmds = malloc(sizeof(t_cmds));
+	if (!cmds)
 		return (NULL);
-	while (aux && aux->token != T_P)
+	cmds->cmds = ft_strdup(matrix[0]);
+	cmds->cmds_flags = malloc (sizeof(char *) * (i + 1));
+	if (!cmds->cmds || !cmds->cmds_flags)
+		return (NULL);
+	i = 0;
+	while (matrix[i])
 	{
-		if (aux->token >= T_G && aux->token <= T_DL)
-			aux = aux->next;
-		else if (aux->content)
-		{
-			matrix[i++] = check_join(aux);
-			
-			
-		}
-		aux = aux->next;
+		cmds->cmds_flags[i] = ft_strdup(matrix[i]);
+		if (!cmds->cmds_flags[i])
+			return (NULL);
+		i++;
 	}
-	matrix[i] = NULL;
-	return (matrix);
+	ft_free(matrix);
+	cmds->cmds_flags[i] = NULL;
+	cmds->next = NULL;
+	return (cmds);
+}
+
+t_cmds	*ft_lstadd_back_cmd(t_cmds **lst, t_cmds *new)
+{
+	t_cmds	*aux;
+
+	aux = *lst;
+	if (!(*lst))
+		(*lst) = new;
+	else if (*lst)
+	{
+		while ((*lst)->next)
+			(*lst) = (*lst)->next;
+		(*lst)->next = new;
+		(*lst) = aux;
+	}
+	return (*lst);
 }
 
 void	token_actions(t_minishell *minishell)
@@ -77,10 +63,18 @@ void	token_actions(t_minishell *minishell)
 	aux = minishell->tokens;
 	while (aux)
 	{
+		if (aux->token == T_W || aux->token == T_DQ || aux->token == T_SQ)
+			aux = word_token(aux, minishell);
 		if (aux && aux->token == T_P)
 			aux = aux->next;
-		else
-			aux = command_create(aux, minishell);
+		else if (aux && aux->token == T_G)
+			aux = redirecc(minishell, aux);
+		else if (aux && aux->token == T_L)
+			aux = redirecc(minishell, aux);
+		else if (aux && aux->token == T_DG)
+			aux = redirecc(minishell, aux);
+		else if (aux && aux->token == T_DL)
+			aux = here_doc(aux->next, minishell);
 	}
-	printf_cmds("en token to cmds", minishell->cmds);
+	printf_cmds(minishell->cmds);
 }

@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 17:30:55 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/20 15:25:45 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 09:30:21 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,13 @@ void	words(char *line, t_token **token, int *i, int flag)
 		create_token(token, T_W, ft_strdup(""), 2);
 		(*i)++;
 	}
-	else if (line[*i] == '\\' && line[*i + 1] != '$')
+	else if (line[*i] == '\\')
 	{
 		start = ++*i;
 		create_token(token, T_W, ft_substr(line, start, ++*i - start), flag);
 	}
 	else
 	{
-		if (line[*i] == '\\' && line[*i + 1] == '$')
-			(*i)++;
 		while (!ft_strchr("| <>\"\'\\", line[*i]) && line[*i])
 			(*i)++;
 		create_token(token, T_W, ft_substr(line, start, *i - start), flag);

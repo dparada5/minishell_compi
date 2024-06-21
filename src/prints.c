@@ -6,23 +6,22 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:09:16 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/20 13:42:23 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 08:29:11 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	printf_cmds(char *str, t_cmds *cmds)
+void	printf_cmds(t_cmds *cmds)
 {
 	int		i;
 	t_cmds	*aux;
 
 	aux = cmds;
-	
 	while (aux)
 	{
 		i = 0;
-		printf("%s Command: %s\n", str, aux->cmd);
+		printf("Command: %s\n", aux->cmds);
 		while (aux->cmds_flags[i])
 		{
 			printf("\tFlags: %s\n", aux->cmds_flags[i]);

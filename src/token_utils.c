@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:00:36 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/20 15:12:08 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 09:32:18 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_token	*new_token(t_token_num token_num, char *content, int flag)
 {
 	t_token	*token;
 
-	token = ft_calloc (sizeof(t_token), 1);
+	token = malloc (sizeof(t_token));
 	if (!token)
 		return (NULL);
 	token->token = token_num;
@@ -71,3 +71,29 @@ void	token_next(t_token *token)
 		flag = 1;
 	}
 }
+
+// void	printf_tokens(t_token *token)
+// {
+// 	t_token	*aux;
+
+// 	if (!token)
+// 		printf("no");
+// 	aux = token;
+// 	while (aux)
+// 	{
+// 		if (aux->token == T_W)
+// 			printf("Token:	W\t");
+// 		else if (aux->token == T_P)
+// 			printf("Token:	P\t");
+// 		else if (aux->token == T_G)
+// 			printf("Token:	G\t");
+// 		else if (aux->token == T_L)
+// 			printf("Token:	L\t");
+// 		else if (aux->token == T_DG)
+// 			printf("Token:  DG\t");
+// 		else if (aux->token == T_DL)
+// 			printf("Token:	DL\t");
+// 		printf("Content: %s\n", aux->content);
+// 		aux = aux->next;
+// 	}
+// }

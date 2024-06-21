@@ -15,3 +15,7 @@ $? es una prueba
 
 
 revisar calloc
+
+echo hola > adios adios
+"""hola"hola ""
+\$USER

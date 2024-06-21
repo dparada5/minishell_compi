@@ -6,11 +6,13 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 14:47:06 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/20 15:47:06 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/13 15:31:56 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+// int	save_word(char *line)
 
 int	state_word(t_state *state, char *line)
 {
@@ -18,7 +20,7 @@ int	state_word(t_state *state, char *line)
 
 	i = 0;
 	state->type = S_W;
-	while (line[i] != ' ' && line[i] && line[i] != '\'' && line[i] != '\"')
+	while (line[i] != ' ' && line[i])
 		i++;
 	if (line[i] == ' ')
 		state->type = S_S;
@@ -45,13 +47,18 @@ int	doble_quote(t_state *state, char *line)
 	int	i;
 
 	i = 1;
-	state->type = S_DQ;
-	while (line[i] != '\"' && line[i])
-		i++;
-	if (line[i] == '\"')
-		state->type = S_W;
+	if (line[i] == '$')
+		state->type = S_CD;
 	else
-		msj_error(ERROR_DQ);
+	{
+		state->type = S_DQ;
+		while (line[i] != '\"' && line[i])
+			i++;
+		if (line[i] == '\"')
+			state->type = S_W;
+		else
+			msj_error(ERROR_DQ);
+	}
 	return (i + 1);
 }
 
@@ -61,7 +68,7 @@ void	states(char *line)
 	int		i;
 
 	i = 0;
-	state = ft_calloc (sizeof(t_state), 1);
+	state = malloc (sizeof(t_state));
 	if (!state)
 		return ;
 	state->type = S_S;

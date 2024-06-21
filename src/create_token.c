@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:49:38 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/20 12:30:46 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/14 16:07:45 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_token	*get_tokens(char *line)
 		else
 			words(line, &token, &i, 1);
 	}
-	printf_tokens(token);
+	// printf_tokens(token);
 	token_next(token);
 	return (token);
 }
