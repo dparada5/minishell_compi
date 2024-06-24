@@ -6,7 +6,7 @@
 #    By: dparada <dparada@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/31 11:04:19 by dparada           #+#    #+#              #
-#    Updated: 2024/06/24 13:50:25 by dparada          ###   ########.fr        #
+#    Updated: 2024/06/24 15:10:27 by dparada          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ RED		= \033[31;1m
 
 SRC_FILES = cmds_create cmds_utils cmds create_token env error \
 expand free main prints pruebis quotes redirecc states token_utils tokens\
-init 
+init expand_types
 # main tokens token_utils error env states prints \
 # redirecc free quotes token_to_cmds create_token cmds pruebis expand \
 # cmds_create cmds_utils

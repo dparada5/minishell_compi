@@ -6,11 +6,11 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 18:02:54 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/21 12:24:11 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/24 15:13:05 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	msj_error(char *str, t_minishell *minishell)
 {

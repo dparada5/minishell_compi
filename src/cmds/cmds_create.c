@@ -6,11 +6,11 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:46:28 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/24 11:55:04 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/24 15:09:41 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 int	is_join(t_token *tokens)
 {

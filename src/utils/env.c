@@ -6,11 +6,11 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 10:36:46 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/21 12:50:44 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/24 15:13:00 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 t_env	*ft_get_envvar(t_env *env, char *var_name)
 {
