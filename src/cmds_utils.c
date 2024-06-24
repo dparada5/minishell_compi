@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:00:17 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/21 14:11:46 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/24 12:21:36 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ t_cmds	*new_cmd(int i, char **matrix, t_token *tokens, t_minishell *minishell)
 {
 	t_cmds	*cmds;
 
-	cmds = malloc(sizeof(t_cmds));
+	cmds = ft_calloc(sizeof(t_cmds), 1);
 	if (!cmds && minishell->flag != 1)
 		msj_error(MALLOC_FAILED, minishell);
 	cmds->cmds = ft_strdup(matrix[0]);
-	cmds->cmds_flags = malloc (sizeof(char *) * (i + 1));
+	cmds->cmds_flags = ft_calloc (sizeof(char *), (i + 1));
 	if ((!cmds->cmds || !cmds->cmds_flags) && minishell->flag != 1)
 		msj_error(MALLOC_FAILED, minishell);
 	i = 0;

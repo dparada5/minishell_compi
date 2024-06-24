@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 09:37:30 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/21 13:03:02 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/24 10:28:41 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,23 @@ void	expansion(t_token *token, t_minishell *minishell)
 	t_token	*aux;
 
 	aux = token;
-	while (aux)
+	if (minishell->flag != 1)
 	{
-		if (aux->token == T_W || aux->token == T_DQ)
+		while (aux)
 		{
-			i = 0;
-			while (aux->content[i])
+			if (aux->token == T_W || aux->token == T_DQ)
 			{
-				if (aux->content[i] == '$')
-					aux->content = check_var(minishell, aux, NULL, &i);
-				else
-					i++;
+				i = 0;
+				while (aux->content[i])
+				{
+					if (aux->content[i] == '$')
+						aux->content = check_var(minishell, aux, NULL, &i);
+					else
+						i++;
+				}
 			}
-		}
-		aux = aux->next;
+			aux = aux->next;
+		}	
 	}
 	
 }

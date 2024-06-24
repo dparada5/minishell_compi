@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:49:38 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/21 13:02:12 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/24 10:33:25 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,22 @@ t_token	*get_tokens(char *line, t_minishell *minishell)
 
 	i = 0;
 	token = NULL;
-	while (line[i])
+	if (minishell->flag != 1)
 	{
-		while (line[i] == ' ')
-			i++;
-		if (ft_strchr("|<>\"'", line[i]))
-			tokens(line, &token, &i, minishell);
-		else
+		while (line[i])
 		{
-			if (words(line, &token, &i, 1) == 1)
-				msj_error(MALLOC_FAILED, minishell);
+			while (line[i] == ' ')
+				i++;
+			if (ft_strchr("|<>\"'", line[i]))
+				tokens(line, &token, &i, minishell);
+			else
+			{
+				if (words(line, &token, &i, 1) == 1)
+					msj_error(MALLOC_FAILED, minishell);
+			}
 		}
+		// printf_tokens(token);
+		token_next(token, minishell);	
 	}
-	// printf_tokens(token);
-	token_next(token, minishell);
 	return (token);
 }

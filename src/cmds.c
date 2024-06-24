@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:13:37 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/21 14:09:51 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/24 11:02:46 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*pop(t_token *token, char *aux2)
 	aux = token->next;
 	token->next = aux->next;
 	aux->next = NULL;
-	ft_lstclear_token(&aux);
+	ft_lstclear_token(aux);
 	return (string);
 }
 
@@ -51,7 +51,7 @@ char	**cmds(t_token *tokens, int len, t_minishell *minishell)
 
 	aux = tokens;
 	i = 0;
-	matrix = malloc(sizeof(char *) * (len + 1));
+	matrix = ft_calloc(sizeof(char *), (len + 1));
 	if (!matrix && minishell->flag != 1)
 		msj_error(MALLOC_FAILED, minishell);
 	while (aux && aux->token != T_P)
@@ -75,11 +75,14 @@ void	token_actions(t_minishell *minishell)
 
 	i = 0;
 	aux = minishell->tokens;
-	while (aux)
+	if (minishell->flag != 1)
 	{
-		if (aux && aux->token == T_P)
-			aux = aux->next;
-		else
-			aux = command_create(aux, minishell);
+		while (aux)
+		{
+			if (aux && aux->token == T_P)
+				aux = aux->next;
+			if (aux)
+				aux = command_create(aux, minishell);
+		}
 	}
 }

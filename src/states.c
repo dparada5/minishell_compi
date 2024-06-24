@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 14:47:06 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/21 12:55:17 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/24 12:44:38 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,5 @@ void	states(char *line, t_minishell *minishell)
 			i++;
 	}
 	free(state);
+	state = NULL;
 }

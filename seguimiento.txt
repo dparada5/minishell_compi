@@ -3,6 +3,7 @@ Paso 2: Saber funciones que vergas hacen le
 
 crear flag de error como tobi
 imprimir error pero no exit
+creo que bien?
 
 poner bien el main
 
@@ -15,7 +16,3 @@ $? es una prueba
 
 
 revisar calloc
-
-echo hola > adios adios
-"""hola"hola ""
-\$USER

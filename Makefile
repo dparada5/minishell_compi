@@ -6,7 +6,7 @@
 #    By: dparada <dparada@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/31 11:04:19 by dparada           #+#    #+#              #
-#    Updated: 2024/06/21 14:03:15 by dparada          ###   ########.fr        #
+#    Updated: 2024/06/24 10:15:01 by dparada          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,11 @@ CYAN    = \033[37;1m
 BOLD	= \033[1m
 RED		= \033[31;1m
 
-SRC_FILES = main tokens token_utils error env states prints \
-redirecc free quotes token_to_cmds create_token cmds pruebis expand \
-cmds_create cmds_utils
+SRC_FILES = cmds_create cmds_utils cmds create_token env error \
+expand free main prints pruebis quotes redirecc states token_utils tokens
+# main tokens token_utils error env states prints \
+# redirecc free quotes token_to_cmds create_token cmds pruebis expand \
+# cmds_create cmds_utils
 
 #SRC_FILES_BONUS = main 
 

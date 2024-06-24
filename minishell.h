@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 10:29:02 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/21 14:10:54 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/24 10:21:58 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,9 +140,9 @@ t_env	*save_env(char **env, int i, t_minishell *minishell);
 //------------------utils------------------------------------
 void	msj_error(char *str, t_minishell *minishell);
 //------------------memory free------------------------------
-void	ft_lstclear_env(t_env **lst);
-void	ft_lstclear_token(t_token **lst);
-void	ft_lstclear_cmds(t_cmds **lst);
+// void	ft_lstclear_env(t_env **lst);
+void	ft_lstclear_token(t_token *lst);
+// void	ft_lstclear_cmds(t_cmds **lst);
 void	ft_free_minishell(t_minishell *minishell);
 //------------------prints------------------------------------
 void	printf_tokens(t_token *token);
