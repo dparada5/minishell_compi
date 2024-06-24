@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 10:29:02 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/24 10:21:58 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/24 13:50:13 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define ERROR_SQ	"unexpected EOF while looking for matching quote '''\n"
 # define ERROR_DQ	"unexpected EOF while looking for matching quote '\"'\n"
 # define MALLOC_FAILED "malloc failed.\n"
+
 typedef enum e_state_num
 {
 	S_S,
@@ -93,13 +94,14 @@ typedef struct s_minishell
 	t_env		*exp;
 	t_token		*tokens;
 	t_cmds		*cmds;
+	char		**env_mat;
 	char		*line;
 	int			flag;
-	int			comm_count;
 }				t_minishell;
 
 //int main(void);
-
+void	init_ev_exp(t_minishell *minishell, char **env);
+void	init_minishell(t_minishell *minishell);
 //------------------variable expand--------------------------
 void	expansion(t_token *token, t_minishell *minishell);
 char	*is_not_expandable(t_token *token, int *i);
@@ -143,7 +145,7 @@ void	msj_error(char *str, t_minishell *minishell);
 // void	ft_lstclear_env(t_env **lst);
 void	ft_lstclear_token(t_token *lst);
 // void	ft_lstclear_cmds(t_cmds **lst);
-void	ft_free_minishell(t_minishell *minishell);
+void	ft_free_minishell(t_minishell *minishell, int bool);
 //------------------prints------------------------------------
 void	printf_tokens(t_token *token);
 void	print_env(t_env *env);
