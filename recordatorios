@@ -1,1 +1,3 @@
-pedirle a delfi que añada un contador en la estructura de minishell para que cada hijo sepa que comando le toca "ejecutar"
+asegutrarme con delfi de como funcionan los fds de cada comando para saber
+por ejemplo si tengo que hacer algún dup2 de la stdin al primer comando
+

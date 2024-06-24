@@ -6,7 +6,7 @@
 /*   By: malena-b <mario3d93@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:18:29 by malena-b          #+#    #+#             */
-/*   Updated: 2024/06/19 11:44:25 by malena-b         ###   ########.fr       */
+/*   Updated: 2024/06/24 14:51:30 by malena-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,33 @@ t_env	*new_env_exp(char *key, char *content)
 	env->next = NULL;
 	free(key);
 	return (env);
+}
+
+void	ft_save_env_mat(t_minishell *mshll)
+{
+	int		size;
+	int		i;
+	t_env	*env_runner;
+	char	*join_aux;
+
+	if (mshll->env_mat)
+	fffffffffffffffffffff
+		//falta añadir aquí que si ya existe la matriz hay que liberarla para sustituirla por la nueva
+	size =0;
+	env_runner = mshll->env;
+	while (env_runner)
+	{
+		size ++;
+		env_runner = env_runner->next;
+	}
+	env_runner = mshll->env;
+	mshll->env_mat = ft_calloc(size, sizeof(char *));
+	i = -1;
+	while (++i < size)
+	{
+		join_aux = ft_strjoin(env_runner->key, "=");
+		mshll->env_mat[i] = ft_strjoin(join_aux, env_runner->content);
+		free (join_aux);
+		env_runner = env_runner->next;
+	}
 }

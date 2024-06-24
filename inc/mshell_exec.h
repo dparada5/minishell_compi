@@ -6,7 +6,7 @@
 /*   By: malena-b <mario3d93@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 11:58:58 by malena-b          #+#    #+#             */
-/*   Updated: 2024/06/20 14:14:46 by malena-b         ###   ########.fr       */
+/*   Updated: 2024/06/24 14:11:08 by malena-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MSHELL_EXEC_H
 
 # include "./libft.h"
+# include <signal.h>
 # include "./minishell.h"
 
 //funciones de delfi que no tengo, solo para que no se queje de errores el código
@@ -25,6 +26,9 @@ t_env	*ft_get_envvar(t_env *env, char *var_name);
 int		ft_change_envvar(t_env *env, char *var_name, char *new_value);
 void	ft_swap_envnodes(t_env *prev, t_env *act, t_env *next, t_env *last);
 t_env	*new_env_exp(char *key, char *content);
+
+//---------------------------------EXEC UTILS--------------------------------//
+char	*ft_get_exec_path(t_minishell *mshll, char *cmd);
 
 //--------------------------------TOKENS UTILS-------------------------------//
 int		ft_pipes_count(t_minishell *mshll);
@@ -39,4 +43,7 @@ void	ft_export_insert(t_minishell *mshll, char *str);
 void	ft_pwd(void);
 void	ft_unset(t_minishell *mshll, char *key_to_delete);
 
+
+//cmds es solo el comando (ls)
+//cmds_flags es el comando más las flags (ls -l)
 #endif

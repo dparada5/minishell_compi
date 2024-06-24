@@ -6,7 +6,7 @@
 /*   By: malena-b <mario3d93@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 10:29:02 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/20 14:36:42 by malena-b         ###   ########.fr       */
+/*   Updated: 2024/06/24 13:32:43 by malena-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ typedef struct s_minishell
 	t_env		*exp;
 	t_token		*tokens;
 	t_cmds		*cmds;
-	int			comm_count;
 	char		*line;
+	char		**env_mat;
 }				t_minishell;
 
 #endif
