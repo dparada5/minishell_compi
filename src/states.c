@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 14:47:06 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/25 12:37:35 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/25 15:01:57 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	simple_quote(t_state *state, char *line, t_minishell *minishell)
 	if (line[i] == '\'')
 		state->type = S_W;
 	else if (line[i] == '\0' && minishell->flag != 1)
-		msj_error(ERROR_DQ, minishell);
+		msj_error(ERROR_DQ, minishell, 2);
 	return (i + 1);
 }
 
@@ -53,7 +53,7 @@ int	doble_quote(t_state *state, char *line, t_minishell *minishell)
 	if (line[i] == '\"')
 		state->type = S_W;
 	else if (line[i] == '\0' && minishell->flag != 1)
-		msj_error(ERROR_DQ, minishell);
+		msj_error(ERROR_DQ, minishell, 2);
 	return (i + 1);
 }
 

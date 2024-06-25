@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 10:29:02 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/24 13:50:13 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/25 15:55:08 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_cmds
 	char			**cmds_flags;
 	int				fd_in;
 	int				fd_out;
+	int				flag;
 	struct s_cmds	*next;
 }				t_cmds;
 
@@ -96,6 +97,7 @@ typedef struct s_minishell
 	t_cmds		*cmds;
 	char		**env_mat;
 	char		*line;
+	int			val_error;
 	int			flag;
 }				t_minishell;
 
@@ -122,7 +124,7 @@ t_token	*open_to_close(t_token *token);
 t_token *open_infile(t_token *token, t_cmds *cmds, t_minishell *minishell);
 t_token *open_trunc(t_token *token, t_cmds *cmds, t_minishell *minishell);
 t_token *open_append(t_token *token, t_cmds *cmds, t_minishell *minishell);
-t_token	*here_doc(t_token *token, t_minishell *minishell);
+t_token	*here_doc(t_token *token, t_cmds *cmds, t_minishell *minishell);
 //------------------token------------------------------------
 int		words(char *line, t_token **token, int *i, int flag);
 int		quotes(t_token **tokens, char *line, char c, int *i);
@@ -140,7 +142,7 @@ void	states(char *line, t_minishell *minishell);
 //------------------env--------------------------------------
 t_env	*save_env(char **env, int i, t_minishell *minishell);
 //------------------utils------------------------------------
-void	msj_error(char *str, t_minishell *minishell);
+void	msj_error(char *str, t_minishell *minishell, int val_error);
 //------------------memory free------------------------------
 // void	ft_lstclear_env(t_env **lst);
 void	ft_lstclear_token(t_token *lst);

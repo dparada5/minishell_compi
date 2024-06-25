@@ -6,16 +6,30 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:50:58 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/25 13:00:13 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/25 15:53:08 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+static char	**ft_free_matrix(char **matrix)
+{
+	int	i;
+	
+	i = 0;
+	while (matrix[i])
+	{
+		free(matrix[i]);
+		matrix[i] = NULL;
+		i++;
+	}
+	free(matrix);
+	return (NULL);
+}
+
 void	ft_lstclear_cmds(t_cmds *lst)
 {
 	t_cmds	*aux;
-	int		i;
 
 	while (lst)
 	{	
@@ -26,16 +40,10 @@ void	ft_lstclear_cmds(t_cmds *lst)
 			close(aux->fd_in);
 		if (aux->fd_out != 1)
 			close(aux->fd_out);
+		if (aux->flag == 1)
+			unlink(".here_doc-tmp");
 		aux->cmds = NULL;
-		i = 0;
-		while (aux->cmds_flags[i])
-		{
-			free(aux->cmds_flags[i]);
-			aux->cmds_flags[i] = NULL;
-			i++;
-		}
-		free(aux->cmds_flags);
-		aux->cmds_flags = NULL;
+		aux->cmds_flags = ft_free_matrix(aux->cmds_flags);
 		free(aux);
 		aux = NULL;
 	}

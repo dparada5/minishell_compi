@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:40:10 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/25 12:37:26 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/25 15:02:46 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		minishell = malloc(sizeof(t_minishell));
 		if (!minishell)
-			msj_error(MALLOC_FAILED, minishell);
+			msj_error(MALLOC_FAILED, minishell, 0);
 		init_ev_exp(minishell, env);
 		init_minishell(minishell);	
 	}

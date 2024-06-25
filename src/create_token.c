@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:49:38 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/25 12:36:58 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/25 15:00:13 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	tokens(char *line, t_token **token, int *i, t_minishell *minishell)
 	else if (line[*i] == '<')
 		flag = less_token(line, token, i, 0);
 	if (flag == 1)
-		msj_error(MALLOC_FAILED, minishell);
+		msj_error(MALLOC_FAILED, minishell, 0);
 	return (*i);
 }
 
@@ -74,7 +74,7 @@ t_token	*get_tokens(char *line, t_minishell *minishell)
 			else
 			{
 				if (words(line, &token, &i, 1) == 1)
-					msj_error(MALLOC_FAILED, minishell);
+					msj_error(MALLOC_FAILED, minishell, 0);
 			}
 		}
 		// printf_tokens(token);

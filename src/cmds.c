@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:13:37 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/25 12:36:55 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/25 15:00:05 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	**cmds(t_token *tokens, int len, t_minishell *minishell)
 	i = 0;
 	matrix = ft_calloc(sizeof(char *), (len + 1));
 	if (!matrix && minishell->flag != 1)
-		msj_error(MALLOC_FAILED, minishell);
+		msj_error(MALLOC_FAILED, minishell, 0);
 	while (aux && aux->token != T_P)
 	{
 		if (aux->token >= T_G && aux->token <= T_DL)

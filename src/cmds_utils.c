@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:00:17 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/25 12:36:53 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/25 15:44:22 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@ void	file_descriptor(t_cmds *cmds, t_token *tokens, t_minishell *minishell)
 		else if (aux->token == T_G)
 			aux = open_trunc(aux, cmds, minishell);
 		else if (aux->token == T_DL)
-			aux = here_doc(aux, NULL);
-		aux = aux->next;
+			aux = here_doc(aux->next, cmds, minishell);
+		if (aux)
+			aux = aux->next;
 	}
 }
 
@@ -63,17 +64,17 @@ t_cmds	*new_cmd(int i, char **matrix, t_token *tokens, t_minishell *minishell)
 
 	cmds = ft_calloc(sizeof(t_cmds), 1);
 	if (!cmds && minishell->flag != 1)
-		msj_error(MALLOC_FAILED, minishell);
+		msj_error(MALLOC_FAILED, minishell, 0);
 	cmds->cmds = ft_strdup(matrix[0]);
 	cmds->cmds_flags = ft_calloc (sizeof(char *), (i + 1));
 	if ((!cmds->cmds || !cmds->cmds_flags) && minishell->flag != 1)
-		msj_error(MALLOC_FAILED, minishell);
+		msj_error(MALLOC_FAILED, minishell, 0);
 	i = 0;
 	while (matrix[i])
 	{
 		cmds->cmds_flags[i] = ft_strdup(matrix[i]);
 		if (!cmds->cmds_flags[i] && minishell->flag != 1)
-			msj_error(MALLOC_FAILED, minishell);
+			msj_error(MALLOC_FAILED, minishell, 0);
 		i++;
 	}
 	matrix = ft_free(matrix);

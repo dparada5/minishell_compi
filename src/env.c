@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 10:36:46 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/25 12:37:00 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/25 15:02:28 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ t_env	*new_env(char *key, char *content, t_minishell *minishell)
 
 	env = malloc (sizeof(t_env));
 	if (!env)
-		msj_error(MALLOC_FAILED, minishell);
+		msj_error(MALLOC_FAILED, minishell, 0);
 	env->key = ft_strdup(key);
 	env->content = ft_strdup(content);
 	if (!env->content || !env->key)
-		msj_error(MALLOC_FAILED, minishell);
+		msj_error(MALLOC_FAILED, minishell, 0);
 	env->next = NULL;
 	free(key);
 	key = NULL;
