@@ -6,11 +6,11 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:00:36 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/24 15:10:00 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/25 12:37:38 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 t_token	*new_token(t_token_num token_num, char *content, int flag)
 {

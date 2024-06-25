@@ -6,11 +6,11 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:50:58 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/24 15:13:13 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/25 13:00:13 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 void	ft_lstclear_cmds(t_cmds *lst)
 {
@@ -22,6 +22,10 @@ void	ft_lstclear_cmds(t_cmds *lst)
 		aux = lst;
 		lst = lst->next;
 		free(aux->cmds);
+		if (aux->fd_in != 0)
+			close(aux->fd_in);
+		if (aux->fd_out != 1)
+			close(aux->fd_out);
 		aux->cmds = NULL;
 		i = 0;
 		while (aux->cmds_flags[i])

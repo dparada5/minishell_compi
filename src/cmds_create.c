@@ -6,11 +6,11 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:46:28 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/24 15:09:41 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/25 12:54:11 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 int	is_join(t_token *tokens)
 {
@@ -58,6 +58,7 @@ t_token	*command_create(t_token *token, t_minishell *minishell)
 	aux = token;
 	while (aux)
 	{
+		//que hago con pipe
 		if (aux->token >= T_G && aux->token <= T_DL && aux->next->next)
 			aux = aux->next;
 		else if (aux->token >= T_G && aux->token <= T_DL)

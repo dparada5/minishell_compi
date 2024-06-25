@@ -6,11 +6,11 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 17:30:55 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/24 15:10:02 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/25 12:37:40 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
 int	back_slash(char *line, t_token **token, int *i, int flag)
 {

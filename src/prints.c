@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:09:16 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/24 10:30:31 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/25 12:43:34 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	printf_cmds(t_cmds *cmds)
 	while (aux)
 	{
 		i = 0;
-		printf("Command: %s\n", aux->cmds);
+		printf("Command: %s %d %d\n", aux->cmds, aux->fd_in, aux->fd_out);
 		while (aux->cmds_flags[i])
 		{
 			printf("\tFlags: %s\n", aux->cmds_flags[i]);
