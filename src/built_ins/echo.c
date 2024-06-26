@@ -20,5 +20,5 @@ void	ft_echo(t_cmds *cmd)
 			write (1, " ", 1);
 	}
 	if (!nnl_flag)
-		write(1, "\n", 1);
+		ft_putstr_fd("\n", 1);
 }

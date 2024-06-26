@@ -6,7 +6,7 @@
 /*   By: malena-b <mario3d93@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 10:29:02 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/24 13:32:43 by malena-b         ###   ########.fr       */
+/*   Updated: 2024/06/26 13:19:17 by malena-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_cmds
 {
 	char			*cmds;
 	char			**cmds_flags;
+	int				index;
 	int				fd_in;
 	int				fd_out;
 	struct s_cmds	*next;

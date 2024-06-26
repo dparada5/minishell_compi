@@ -31,33 +31,46 @@ int	ft_check_for_builtins(t_minishell *mshll, t_cmds *cmd)
 
 //void	ft_factory(t_minishell *mshll, )
 
-int	ft_kindergarden(t_minishell *mshll, t_cmds *cmd, int pipes_left)
+int	ft_kindergarden(t_minishell *mshll, t_cmds *cmd, int *pipe_fd)
 {
 	char	*exec_path;
 
+	if (!ft_strlen(cmd->cmds))
+		exit (0);//PORHACER comprobar si los hijos tiene que liberar la memoria de las estructuras o si eso es solo el padre
+	if (!cmd->index)
+		close(pipe_fd[0]);
+	if (!cmd->next)
+		close(pipe_fd[1]);
+	if (cmd->fd_in != 0)
+		dup2(cmd->fd_in, 0);
+	else
+		dup2(pipe_fd[0], 0);
+	if (cmd->fd_out != 1)
+		dup2(cmd->fd_out, 1);
+	else
+		dup2(pipe_fd[1], 1);
 	if (ft_check_for_builtins(mshll, cmd))
-		exit(0);
+		exit(0); //PORHACER comprobar si los hijos tiene que liberar la memoria de las estructuras o si eso es solo el padre
 	exec_path = ft_get_exec_path(mshll, cmd->cmds);
-	//me falta añadir el env como matriz que está casi listo en env_utils
-	execve(exec_path, mshll->cmds->cmds_flags, )
+	ft_save_env_mat(mshll);
+	execve(exec_path, mshll->cmds->cmds_flags, mshll->env_mat);
 }
 
 void	ft_bedroom(t_minishell *mshll, int	pipes_left)
 {
-	int		fd[2];
+	int		pipe_fd[2];
 	pid_t	pid;
 	t_cmds	*runner;
-	int		kids;
 
-	kids = 0;
+	ft_set_cmds_index(mshll);
 	runner = mshll->cmds;
 	while (pipes_left >= 0)
 	{
 		pid = fork();
 		if (pid == -1)
-			return ;//añadir gestión en este caso de error
+			return ;//PORHACER añadir gestión en este caso de error
 		if (pid == 0)
-			ft_kindergarden(mshll, runner, pipes_left);
+			ft_kindergarden(mshll, runner, pipe_fd);
 		runner = runner->next;
 		pipes_left--;
 	}

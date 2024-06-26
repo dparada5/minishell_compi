@@ -26,9 +26,8 @@ void	ft_check_and_delete(t_env **envxp, char *key)
 
 }
 
-//cambiar los arg cuando delfi añada el exp a la struct de minishell
-void	ft_unset(t_minishell *mshll, t_env *exp, char *key_to_delete)
+void	ft_unset(t_minishell *mshll, char *key_to_delete)
 {
 	ft_check_and_delete(&(mshll->env), key_to_delete);
-	ft_check_and_delete(&exp, key_to_delete);
+	ft_check_and_delete(&(mshll->exp), key_to_delete);
 }

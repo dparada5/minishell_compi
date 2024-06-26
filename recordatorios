@@ -1,3 +1,0 @@
-asegutrarme con delfi de como funcionan los fds de cada comando para saber
-por ejemplo si tengo que hacer algún dup2 de la stdin al primer comando
-

@@ -6,7 +6,7 @@
 /*   By: malena-b <mario3d93@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:18:29 by malena-b          #+#    #+#             */
-/*   Updated: 2024/06/24 14:51:30 by malena-b         ###   ########.fr       */
+/*   Updated: 2024/06/26 12:23:57 by malena-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ void	ft_swap_envnodes(t_env *prev, t_env *act, t_env *next, t_env *last)
 	act->next = last;
 }
 
-//Me he tenido que crear esta función por que para el export
-//si que se puede añadir un nuevo nodo que no tenga "content"
 t_env	*new_env_exp(char *key, char *content)
 {
 	t_env	*env;
@@ -74,8 +72,8 @@ void	ft_save_env_mat(t_minishell *mshll)
 	char	*join_aux;
 
 	if (mshll->env_mat)
-	fffffffffffffffffffff
-		//falta añadir aquí que si ya existe la matriz hay que liberarla para sustituirla por la nueva
+		ft_free_mat(mshll->env_mat);
+	mshll->env_mat = NULL;
 	size =0;
 	env_runner = mshll->env;
 	while (env_runner)

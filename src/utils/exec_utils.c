@@ -6,7 +6,7 @@
 /*   By: malena-b <mario3d93@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:39:37 by malena-b          #+#    #+#             */
-/*   Updated: 2024/06/24 13:49:23 by malena-b         ###   ########.fr       */
+/*   Updated: 2024/06/26 13:44:20 by malena-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,18 @@ char	*ft_get_exec_path(t_minishell *mshll, char *cmd)
 	ft_free_mat(path_splitted);
 	path_splitted = NULL;
 	return (NULL);
+}
+
+void	ft_set_cmds_index(t_minishell *mshll)
+{
+	int	i;
+	t_cmds	*cmd_runner;
+
+	i = 0;
+	cmd_runner = mshll->cmds;
+	while (cmd_runner)
+	{
+		cmd_runner->index = i++;
+		cmd_runner = cmd_runner->next;
+	}
 }

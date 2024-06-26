@@ -6,7 +6,7 @@
 /*   By: malena-b <mario3d93@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 11:58:58 by malena-b          #+#    #+#             */
-/*   Updated: 2024/06/24 14:11:08 by malena-b         ###   ########.fr       */
+/*   Updated: 2024/06/26 13:45:50 by malena-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,17 @@ t_env	*ft_get_envvar(t_env *env, char *var_name);
 int		ft_change_envvar(t_env *env, char *var_name, char *new_value);
 void	ft_swap_envnodes(t_env *prev, t_env *act, t_env *next, t_env *last);
 t_env	*new_env_exp(char *key, char *content);
+void	ft_save_env_mat(t_minishell *mshll);
 
 //---------------------------------EXEC UTILS--------------------------------//
 char	*ft_get_exec_path(t_minishell *mshll, char *cmd);
+void	ft_set_cmds_index(t_minishell *mshll);
 
 //--------------------------------TOKENS UTILS-------------------------------//
 int		ft_pipes_count(t_minishell *mshll);
+
+//--------------------------------GENERAL UTILS------------------------------//
+void	ft_free_mat(char **mat);
 
 //----------------------------------BUILTINS---------------------------------//
 int		ft_cd(t_minishell *minishell, t_env *env, int error_check);

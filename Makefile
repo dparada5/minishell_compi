@@ -6,7 +6,7 @@
 #    By: malena-b <mario3d93@gmail.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/18 10:33:13 by dparada           #+#    #+#              #
-#    Updated: 2024/06/11 14:10:03 by malena-b         ###   ########.fr        #
+#    Updated: 2024/06/26 12:22:50 by malena-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,9 @@ CYAN		= \033[0;37m
 RED			= \033[0;31m
 BOLD		= \033[1m
 
-SRC_FILES = built_ins env_utils
+SRC_FILES = built_ins/cd built_ins/echo built_ins/env built_ins/exit \
+	built_ins/export built_ins/pwd built_ins/unset utils/env_utils \
+	utils/exec_utils utils/general_utils utils/tokens_utils executor \
 BONUS_FILES =
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
