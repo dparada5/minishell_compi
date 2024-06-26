@@ -1,7 +1,0 @@
-Paso 1: Encontrar compañero leto
-Paso 2: Saber funciones que vergas hacen le
-
-
-revisar here_doc
-
-revisar calloc

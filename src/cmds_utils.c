@@ -6,37 +6,44 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:00:17 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/25 15:44:22 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/26 16:19:58 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_token	*open_to_close(t_token *token)
-{
-	int	fd;
+// t_token	*open_to_close(t_token *token, t_minishell *minishell)
+// {
+// 	int	fd;
 
-	fd = 0;
-	if (token->token == T_G)
-	{
-		token = token->next;
-		fd = open(token->content, O_RDWR | O_CREAT | O_TRUNC, 0644);
-	}
-	else if (token->token == T_DG)
-	{
-		token = token->next;
-		fd = open(token->content, O_RDWR | O_CREAT | O_APPEND, 0644);
-	}
-	else if (token->token == T_L)
-	{
-		token = token->next;
-		fd = open(token->content, O_RDONLY);
-	}
-	// else if (crear heredoc)
-	if (fd > 0)
-		close(fd);
-	return (token);
-}
+// 	fd = 0;
+// 	if (token->token == T_G)
+// 	{
+// 		token = token->next;
+// 		fd = open(token->content, O_RDWR | O_CREAT | O_TRUNC, 0644);
+// 	}
+// 	else if (token->token == T_DG)
+// 	{
+// 		token = token->next;
+// 		fd = open(token->content, O_RDWR | O_CREAT | O_APPEND, 0644);
+// 	}
+// 	else if (token->token == T_L)
+// 	{
+// 		token = token->next;
+// 		fd = open(token->content, O_RDONLY);
+// 		if (fd < 0)
+// 			msj_error("No such file or directory\n", minishell, 1);
+// 	}
+// 	else if (token->token == T_DL)
+// 	{
+// 		token = token->next;
+// 		here_doc(token, NULL, minishell);
+// 		unlink(".here_doc.tmp");
+// 	}
+// 	if (fd > 0)
+// 		close(fd);
+// 	return (token);
+// }
 
 void	file_descriptor(t_cmds *cmds, t_token *tokens, t_minishell *minishell)
 {
@@ -102,20 +109,3 @@ t_cmds	*ft_lstadd_back_cmd(t_cmds **lst, t_cmds *new)
 	}
 	return (*lst);
 }
-
-// void	token_actions(t_minishell *minishell)
-// {
-// 	t_token	*aux;
-// 	int		i;
-
-// 	i = 0;
-// 	aux = minishell->tokens;
-// 	while (aux)
-// 	{
-// 		if (aux && aux->token == T_P)
-// 			aux = aux->next;
-// 		else
-// 			aux = command_create(aux, minishell);
-// 	}
-// 	printf_cmds("en token to cmds", minishell->cmds);
-// }

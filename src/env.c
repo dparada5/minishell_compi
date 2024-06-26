@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 10:36:46 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/25 15:02:28 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/26 16:34:46 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ t_env	*save_env(char **env, int i, t_minishell *minishell)
 		while (env[i][j] != '=')
 			j++;
 		if (i == 0)
-			environment = new_env(ft_substr(env[i], 0, j), &env[i][j + 1], minishell);
+			environment = new_env(ft_substr(env[i], 0, j), &env[i][j + 1], \
+			minishell);
 		else
 		{
 			aux = new_env(ft_substr(env[i], 0, j), &env[i][j + 1], minishell);

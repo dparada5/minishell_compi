@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:09:16 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/25 12:43:34 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/26 14:01:32 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	printf_tokens(t_token *token)
 {
 	t_token	*aux;
 
-	if (!token)
-		printf("no\n");
 	aux = token;
 	while (aux)
 	{
@@ -57,8 +55,7 @@ void	printf_tokens(t_token *token)
 			printf("Token:  DG\t");
 		else if (aux->token == T_DL)
 			printf("Token:	DL\t");
-		printf("Flag: %d\t", aux->flag);
-		printf("Content: %s\n", aux->content);
+		printf("Flag: %d\tContent: %s\n", aux->flag, aux->content);
 		aux = aux->next;
 	}
 	printf("------------------------------------------\n");

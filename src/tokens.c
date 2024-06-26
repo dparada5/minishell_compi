@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 17:30:55 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/25 12:37:40 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/26 16:30:18 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ int	back_slash(char *line, t_token **token, int *i, int flag)
 		start = ++*i;
 		if (line[*i] == '$')
 			start--;
-		error = create_token(token, T_W, ft_substr(line, start, ++*i - start), flag);
+		error = create_token(token, T_W, ft_substr(line, start, ++*i - start), \
+		flag);
 	}
-	
 	return (error);
 }
+
 int	words(char *line, t_token **token, int *i, int flag)
 {
 	int	start;
@@ -51,7 +52,8 @@ int	words(char *line, t_token **token, int *i, int flag)
 	{
 		while (!ft_strchr("| <>\"\'\\", line[*i]) && line[*i])
 			(*i)++;
-		error = create_token(token, T_W, ft_substr(line, start, *i - start), flag);
+		error = create_token(token, T_W, ft_substr(line, start, *i - start), \
+		flag);
 	}
 	return (error);
 }
@@ -102,9 +104,11 @@ int	quotes(t_token **tokens, char *line, char c, int *i)
 	while (line[*i] && line[*i] != c)
 		(*i)++;
 	if (c == '\"')
-		error = create_token(tokens, T_DQ, ft_substr(line, start, *i - start), flag);
+		error = create_token(tokens, T_DQ, ft_substr(line, start, *i - start), \
+		flag);
 	else if (c == '\'')
-		error = create_token(tokens, T_SQ, ft_substr(line, start, *i - start), flag);
+		error = create_token(tokens, T_SQ, ft_substr(line, start, *i - start), \
+		flag);
 	if (line[*i] == c)
 		(*i)++;
 	return (error);

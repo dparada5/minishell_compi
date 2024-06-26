@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:49:38 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/25 15:00:13 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/26 16:28:13 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char *content, int flag)
 	t_token	*aux;
 
 	if (!*token)
-	{	
+	{
 		*token = new_token(token_num, content, flag);
 		if (!*token)
 			return (1);
@@ -77,8 +77,7 @@ t_token	*get_tokens(char *line, t_minishell *minishell)
 					msj_error(MALLOC_FAILED, minishell, 0);
 			}
 		}
-		// printf_tokens(token);
-		token_next(token, minishell);	
+		token_next(token, minishell);
 	}
 	return (token);
 }

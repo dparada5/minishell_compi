@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 10:29:02 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/25 15:55:08 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/26 17:07:32 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_cmds
 	char			**cmds_flags;
 	int				fd_in;
 	int				fd_out;
+	int				index;
 	int				flag;
 	struct s_cmds	*next;
 }				t_cmds;
@@ -101,29 +102,27 @@ typedef struct s_minishell
 	int			flag;
 }				t_minishell;
 
-//int main(void);
 void	init_ev_exp(t_minishell *minishell, char **env);
 void	init_minishell(t_minishell *minishell);
 //------------------variable expand--------------------------
-void	expansion(t_token *token, t_minishell *minishell);
-char	*is_not_expandable(t_token *token, int *i);
-char	*does_not_exist(t_token *token, char *var, int *i);
-char	*expand(t_token *token, t_env *aux_env, int *i, int l);
+void	check_expansion(t_token *token, t_minishell *minishell);
+char	*expansion(char *line, t_minishell *minishell);
+char	*is_not_expandable(char *line, int *i);
+char	*does_not_exist(char *line, char *var, int *i);
+char	*expand(char *line, t_env *aux_env, int *i, int l);
 //------------------actions----------------------------------
 void	token_actions(t_minishell *minishell);
 //_____cmds__________________________________________________
-char	**cmds(t_token *token,int len, t_minishell *minishell);
-t_token	*word_token(t_token *token, t_minishell *minishell);
-// void	pop(t_token *token);
+char	**cmds(t_token *token, int len, t_minishell *minishell);
 t_cmds	*new_cmd(int i, char **matrix, t_token *tokens, t_minishell *minishell);
 t_cmds	*ft_lstadd_back_cmd(t_cmds **lst, t_cmds *new);
 t_token	*command_create(t_token *token, t_minishell *minishell);
-int	is_join(t_token *tokens);
+int		is_join(t_token *tokens);
 //_____redirecc__________________________________________________
-t_token	*open_to_close(t_token *token);
-t_token *open_infile(t_token *token, t_cmds *cmds, t_minishell *minishell);
-t_token *open_trunc(t_token *token, t_cmds *cmds, t_minishell *minishell);
-t_token *open_append(t_token *token, t_cmds *cmds, t_minishell *minishell);
+t_token	*open_to_close(t_token *token, t_minishell *minishell);
+t_token	*open_infile(t_token *token, t_cmds *cmds, t_minishell *minishell);
+t_token	*open_trunc(t_token *token, t_cmds *cmds, t_minishell *minishell);
+t_token	*open_append(t_token *token, t_cmds *cmds, t_minishell *minishell);
 t_token	*here_doc(t_token *token, t_cmds *cmds, t_minishell *minishell);
 //------------------token------------------------------------
 int		words(char *line, t_token **token, int *i, int flag);

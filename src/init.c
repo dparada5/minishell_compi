@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:40:10 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/25 15:05:21 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/26 17:00:28 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	check_line(t_minishell *minishell)
 {
 	states(minishell->line, minishell);
 	minishell->tokens = get_tokens(minishell->line, minishell);
-	expansion(minishell->tokens, minishell);
+	check_expansion(minishell->tokens, minishell);
 	printf_tokens(minishell->tokens);
 	token_actions(minishell);
 	printf_cmds(minishell->cmds);

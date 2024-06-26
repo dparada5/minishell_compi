@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:13:37 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/25 15:00:05 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/26 16:19:02 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	*check_join(t_token *aux)
 {
 	char	*aux2;
 	char	*buffer;
-	
+
 	buffer = ft_strdup(aux->content);
 	while (is_join (aux->next) == 1)
 	{
@@ -37,9 +37,6 @@ static char	*check_join(t_token *aux)
 		buffer = pop(aux, aux2);
 		aux2 = NULL;
 	}
-	// matrix[i++] = ft_strdup(buffer);
-	// free(buffer);
-	// buffer = NULL;
 	return (buffer);
 }
 

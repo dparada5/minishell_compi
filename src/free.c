@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:50:58 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/25 15:53:08 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/26 16:39:44 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static char	**ft_free_matrix(char **matrix)
 {
 	int	i;
-	
+
 	i = 0;
 	while (matrix[i])
 	{
@@ -32,7 +32,7 @@ void	ft_lstclear_cmds(t_cmds *lst)
 	t_cmds	*aux;
 
 	while (lst)
-	{	
+	{
 		aux = lst;
 		lst = lst->next;
 		free(aux->cmds);
@@ -41,7 +41,7 @@ void	ft_lstclear_cmds(t_cmds *lst)
 		if (aux->fd_out != 1)
 			close(aux->fd_out);
 		if (aux->flag == 1)
-			unlink(".here_doc-tmp");
+			unlink(".here_doc.tmp");
 		aux->cmds = NULL;
 		aux->cmds_flags = ft_free_matrix(aux->cmds_flags);
 		free(aux);

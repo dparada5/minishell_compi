@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 14:47:06 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/25 15:01:57 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/26 17:52:00 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	state_word(t_state *state, char *line)
 
 	i = 0;
 	state->type = S_W;
-	while (line[i] != ' ' && line[i])
+	while (line[i] != ' ' && line[i] != '\"' && line[i] != '\'' && line[i])
 		i++;
 	if (line[i] == ' ')
 		state->type = S_S;
@@ -36,10 +36,16 @@ int	simple_quote(t_state *state, char *line, t_minishell *minishell)
 	while (line[i] != '\'' && line[i])
 		i++;
 	if (line[i] == '\'')
+	{
 		state->type = S_W;
+		return (i + 1);
+	}
 	else if (line[i] == '\0' && minishell->flag != 1)
-		msj_error(ERROR_DQ, minishell, 2);
-	return (i + 1);
+	{
+		msj_error(ERROR_SQ, minishell, 2);
+		return (i);
+	}
+	return (0);
 }
 
 int	doble_quote(t_state *state, char *line, t_minishell *minishell)
@@ -51,10 +57,16 @@ int	doble_quote(t_state *state, char *line, t_minishell *minishell)
 	while (line[i] != '\"' && line[i])
 		i++;
 	if (line[i] == '\"')
+	{
 		state->type = S_W;
+		return (i + 1);
+	}
 	else if (line[i] == '\0' && minishell->flag != 1)
+	{
 		msj_error(ERROR_DQ, minishell, 2);
-	return (i + 1);
+		return (i);
+	}
+	return (0);
 }
 
 void	states(char *line, t_minishell *minishell)
