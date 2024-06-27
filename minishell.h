@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 10:29:02 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/26 17:07:32 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/27 10:37:14 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 
 /*tanselmo y misaguir estuvieron aquí :)*/
 
-# define ERROR_FD	"FD doesn't exist"
+# define ERROR_FD	"No such file or directory.\n"
 # define ERROR_EOF 	"syntax error: unexpected end of file\n"
 # define ERROR_UPIPE	"syntax error near unexpected token '|'\n"
 # define ERROR_UT	"syntax error near unexpected token\n"
@@ -119,7 +119,6 @@ t_cmds	*ft_lstadd_back_cmd(t_cmds **lst, t_cmds *new);
 t_token	*command_create(t_token *token, t_minishell *minishell);
 int		is_join(t_token *tokens);
 //_____redirecc__________________________________________________
-t_token	*open_to_close(t_token *token, t_minishell *minishell);
 t_token	*open_infile(t_token *token, t_cmds *cmds, t_minishell *minishell);
 t_token	*open_trunc(t_token *token, t_cmds *cmds, t_minishell *minishell);
 t_token	*open_append(t_token *token, t_cmds *cmds, t_minishell *minishell);
@@ -143,9 +142,7 @@ t_env	*save_env(char **env, int i, t_minishell *minishell);
 //------------------utils------------------------------------
 void	msj_error(char *str, t_minishell *minishell, int val_error);
 //------------------memory free------------------------------
-// void	ft_lstclear_env(t_env **lst);
 void	ft_lstclear_token(t_token *lst);
-// void	ft_lstclear_cmds(t_cmds **lst);
 void	ft_free_minishell(t_minishell *minishell, int bool);
 //------------------prints------------------------------------
 void	printf_tokens(t_token *token);

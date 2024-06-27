@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmds.c                                             :+:      :+:    :+:   */
+/*   create_cmd_matrix.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:13:37 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/26 16:19:02 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/27 11:28:04 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,3 @@ char	**cmds(t_token *tokens, int len, t_minishell *minishell)
 	return (matrix);
 }
 
-void	token_actions(t_minishell *minishell)
-{
-	t_token	*aux;
-	int		i;
-
-	i = 0;
-	aux = minishell->tokens;
-	if (minishell->flag != 1)
-	{
-		while (aux)
-		{
-			if (aux && aux->token == T_P)
-				aux = aux->next;
-			if (aux)
-				aux = command_create(aux, minishell);
-		}
-	}
-}

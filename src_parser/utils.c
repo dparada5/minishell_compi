@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 18:02:54 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/25 14:04:32 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/27 11:29:00 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,16 @@ void	msj_error(char *str, t_minishell *minishell, int val_error)
 	minishell->val_error = val_error;
 }
 
-//mensaje ede error pa errores
+
+int	is_join(t_token *tokens)
+{
+	if (tokens && (tokens->token == T_W \
+	|| tokens->token == T_DQ || tokens->token == T_SQ))
+	{
+		if (tokens->content && tokens->flag == 1)
+			return (1);
+	}
+	else
+		return (2);
+	return (0);
+}

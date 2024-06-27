@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:46:28 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/26 16:21:19 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/27 11:13:26 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,6 @@ static char	**create_mat(t_minishell *minishell)
 		msj_error(MALLOC_FAILED, minishell, 0);
 	split[1] = NULL;
 	return (split);
-}
-
-int	is_join(t_token *tokens)
-{
-	if (tokens && (tokens->token == T_W \
-	|| tokens->token == T_DQ || tokens->token == T_SQ))
-	{
-		if (tokens->content && tokens->flag == 1)
-			return (1);
-	}
-	else
-		return (2);
-	return (0);
 }
 
 t_token	*command_words(t_token *aux, int i, \
@@ -85,4 +72,23 @@ t_token	*command_create(t_token *token, t_minishell *minishell)
 	else if (aux)
 		aux = command_words(aux, 1, minishell, token);
 	return (aux);
+}
+
+void	token_actions(t_minishell *minishell)
+{
+	t_token	*aux;
+	int		i;
+
+	i = 0;
+	aux = minishell->tokens;
+	if (minishell->flag != 1)
+	{
+		while (aux)
+		{
+			if (aux && aux->token == T_P)
+				aux = aux->next;
+			if (aux)
+				aux = command_create(aux, minishell);
+		}
+	}
 }

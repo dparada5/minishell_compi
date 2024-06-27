@@ -6,44 +6,11 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:00:17 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/26 16:19:58 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/27 11:28:01 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-// t_token	*open_to_close(t_token *token, t_minishell *minishell)
-// {
-// 	int	fd;
-
-// 	fd = 0;
-// 	if (token->token == T_G)
-// 	{
-// 		token = token->next;
-// 		fd = open(token->content, O_RDWR | O_CREAT | O_TRUNC, 0644);
-// 	}
-// 	else if (token->token == T_DG)
-// 	{
-// 		token = token->next;
-// 		fd = open(token->content, O_RDWR | O_CREAT | O_APPEND, 0644);
-// 	}
-// 	else if (token->token == T_L)
-// 	{
-// 		token = token->next;
-// 		fd = open(token->content, O_RDONLY);
-// 		if (fd < 0)
-// 			msj_error("No such file or directory\n", minishell, 1);
-// 	}
-// 	else if (token->token == T_DL)
-// 	{
-// 		token = token->next;
-// 		here_doc(token, NULL, minishell);
-// 		unlink(".here_doc.tmp");
-// 	}
-// 	if (fd > 0)
-// 		close(fd);
-// 	return (token);
-// }
 
 void	file_descriptor(t_cmds *cmds, t_token *tokens, t_minishell *minishell)
 {

@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 16:50:53 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/26 17:09:07 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/27 11:28:38 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ t_token	*here_doc(t_token *token, t_cmds *cmds, t_minishell *minishell)
 	int		fd;
 	char	*line;
 
-	line = NULL;
 	if (cmds->fd_in != 0)
 		close(cmds->fd_in);
 	fd = open (".here_doc.tmp", O_RDWR | O_CREAT | O_TRUNC, 0644);

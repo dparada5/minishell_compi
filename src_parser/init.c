@@ -6,7 +6,7 @@
 /*   By: dparada <dparada@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:40:10 by dparada           #+#    #+#             */
-/*   Updated: 2024/06/26 17:00:28 by dparada          ###   ########.fr       */
+/*   Updated: 2024/06/26 20:07:29 by dparada          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	check_line(t_minishell *minishell)
 
 void	init_minishell(t_minishell *minishell)
 {
-	minishell->line = readline("minishell> ");
+	minishell->line = readline("minishell$ ");
 	while (minishell->line)
 	{
 		minishell->tokens = NULL;
